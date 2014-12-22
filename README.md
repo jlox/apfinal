@@ -1,4 +1,50 @@
 apfinal
 =======
 
-Jeanne Locker and Derrick Lui Final Project
+  ___________________________________________
+~/*** AP CS Term 1 Final Project Checklist ***\~
+ _____________________________________________
+
+Required:
+- 2d array
+- not gui
+- pokemon
+- variables for direction
+- create maps
+- create trainers
+- create like 10~ pokemon
+- arraylists for pokemon party
+- find out how to do dynamic screen in java terminal
+
+
+Stuff to add to basechar:
+- pokedex
+- pokemon party
+- bag/inventory
+- save
+
+Stuff to add to pokemon:
+- level up
+- pokemon moves
+- name
+- HP
+- Experience
+- Boolean for level/move requirement *
+- arrayList for moves; once you hit certain level, adds move name to arraylist
+  and you can use it
+
+Division of work:
+
+ /Jeanne:
+> basechar for actual character
+> Driver.java
+> figure out colors
+
+ /Derrick:
+> base pokemon class
+> extensions of pokemon class (individual pokemon)
+> inventory
+
+/Together:
+> figure out ascii field thing
+> how to have screen update?
