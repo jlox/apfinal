@@ -29,4 +29,20 @@ Stuff to add to pokemon:
 - Boolean for level/move requirement *
 - arrayList for moves; once u hit certain level, adds move name to arraylist
   and you can use it
--
+
+Division of work:
+
+ /Jeanne:
+> basechar for actual character
+> Driver.java
+> figure out colors
+
+ /Derrick:
+> base pokemon class
+> extensions of pokemon class (individual pokemon)
+> inventory
+
+/Together:
+> figure out ascii field thing
+> how to have screen update?
+> 
