@@ -1,12 +1,10 @@
-public class basechar{
+public class npc extends basechar{
     ArrayList<String> inventory = new ArrayList();
-    private String name = "";
-    
     public void inputName(String name){
-	this.name = name;
+	super.inputName(name);
     }
     public String getName(){
-	return this.name;
+	return super.getName();
     }
     
 }
