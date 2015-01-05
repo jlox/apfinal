@@ -25,11 +25,10 @@ public class charmander extends pokemon {
 
     public void dodge(pokemon other)
     {
-	System.out.println(this.getName() + " DODGES " + other.getName() + "'s attack");
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
 	if (other.getAttackStrength() < 15)
 	    {
-		System.out.println(this.getName() + " DODGED THE ATTACK!");
+		System.out.println(this.getName() + " DODGED the attack!");
 	    }
 	
 	other.assignDamage(this);
