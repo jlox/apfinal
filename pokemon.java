@@ -66,12 +66,7 @@ public abstract class pokemon {
     public int getStrength(){
 	return strength;
     }
-    public void setMana(int s){
-	mana=s;
-    }
-    public int getMana(){
-	return mana;
-    }
+
     public void setName(String n){
 	name = n;
     }

@@ -2,7 +2,7 @@ import java.util.Random;
 public class charmander extends pokemon {
     Random randomNumber = new Random();
     public charmander(String n) {
-	setStrength(50));
+	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
@@ -34,7 +34,7 @@ public class charmander extends pokemon {
 	other.assignDamage(this);
 	
     }
-    public void run (basechar other)
+    public void run (pokemon other)
     {
 	boolean escape = randomNumber.nextInt(150) < this.getStrength();
 	if (escape) 
