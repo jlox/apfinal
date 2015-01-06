@@ -1,0 +1,6 @@
+public class map{
+    char[][] home = new char[18][10];
+    char[][] m1 = new char[20][20];
+    
+
+}
