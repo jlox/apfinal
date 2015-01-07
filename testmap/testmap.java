@@ -11,7 +11,14 @@ public class testmap extends JFrame implements ActionListener{
     mapmaker g = new mapmaker();
     int ycor;
     int xcor;
-    String currentmap = "board";
+    int[] currentMap = {1,2,3,4,5,6,7,8,9};
+    // To implement:
+    
+    /* Make a getCurrentMap function that will check the currentMap variable
+       and then based on that will pull the specific map (ex. g.board) for
+       moving around in.
+
+     */
     
     public void
 
