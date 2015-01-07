@@ -5,7 +5,7 @@ public class mapmaker {
 	board = new char[r][c];
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
-		board[i][j]='▒';
+		board[i][j]=' ';
 	    }
 	}
 		
@@ -15,11 +15,11 @@ public class mapmaker {
 	this(10,10);
     }
 
-    public String toString(){
+    public String showMap(char[][] x){
 	String s = "";
-	for (int i = 0; i < board.length; i++) {
-	    for (int j = 0; j < board[i].length; j++) {
-		s = s + board[i][j];
+	for (int i = 0; i < x.length; i++) {
+	    for (int j = 0; j < x[i].length; j++) {
+		s = s + x[i][j];
 	    }
 	    s = s + "\n";
 	}

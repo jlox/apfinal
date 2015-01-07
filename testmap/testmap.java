@@ -11,7 +11,9 @@ public class testmap extends JFrame implements ActionListener{
     mapmaker g = new mapmaker();
     int ycor;
     int xcor;
-
+    String currentmap = "board";
+    
+    public void
 
 
     public testmap(){
@@ -22,6 +24,9 @@ public class testmap extends JFrame implements ActionListener{
 	text.setRows(30);
 	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
 	text.setEditable(false);
+	Font font = new Font("Monospaced", Font.PLAIN, 20);
+	text.setFont(font);
+	text.setForeground(Color.RED);
 	pane.add(text);
 	text.addKeyListener(new Key());
     }
@@ -34,43 +39,43 @@ public class testmap extends JFrame implements ActionListener{
 	public void keyPressed(KeyEvent e) {
 	    int c = e.getKeyCode();
 	    if (c == KeyEvent.VK_SPACE){
-		g.board[1][1] = '▓';
+		g.board[1][1] = '@';
 		xcor = 1;
 		ycor = 1;
 	    }
 	    if (c == KeyEvent.VK_LEFT){
 		if (xcor - 1 >= 0) {
-		g.board[ycor][xcor] = '▒';
-		xcor = xcor - 1;
-		g.board[ycor][xcor] = '▓';
-		swagger = g.toString();
-		text.setText(swagger);
+		    g.board[ycor][xcor] = ' ';
+		    xcor = xcor - 1;
+		    g.board[ycor][xcor] = '@';
+		    swagger = g.showMap(g.(currentmap));
+		    text.setText(swagger);
 		}
 	    }
 	    if (c == KeyEvent.VK_RIGHT){
 		if (xcor + 1 < 10) {
-		    g.board[ycor][xcor] = '▒';
+		    g.board[ycor][xcor] = ' ';
 		    xcor = xcor + 1;
-		    g.board[ycor][xcor] = '▓';
-		    swagger = g.toString();
+		    g.board[ycor][xcor] = '@';
+		    swagger = g.showMap(g.(currentmap));
 		    text.setText(swagger);
 		}
 	    }
 	    if (c == KeyEvent.VK_UP){
-		if (ycor - 1 >= 0) {
-		    g.board[ycor][xcor] = '▒';
+		if (ycor - 1 >= 0 && (g(ycor - 1)!= "_")) {
+		    g.board[ycor][xcor] = ' ';
 		    ycor = ycor - 1;
-		    g.board[ycor][xcor] = '▓';
-		    swagger = g.toString();
+		    g.board[ycor][xcor] = '@';
+		    swagger = g.showMap(g.(currentmap));
 		    text.setText(swagger);
 		}
 	    }
 	    if (c == KeyEvent.VK_DOWN){
 		if (ycor + 1 < 10) {
-		    g.board[ycor][xcor] = '▒';
+		    g.board[ycor][xcor] = ' ';
 		    ycor = ycor + 1;
-		    g.board[ycor][xcor] = '▓';
-		    swagger = g.toString();
+		    g.board[ycor][xcor] = '@';
+		    swagger = g.showMap(g.(currentmap));
 		    text.setText(swagger);
 		}
 	    }
@@ -84,7 +89,7 @@ public class testmap extends JFrame implements ActionListener{
     public static void main(String[] args) {
 	testmap f = new testmap();
 	f.setTitle("Testmap");
-	f.setSize(600,400);
+	f.setSize(1000,700);
 	f.setVisible(true);
     
     }
