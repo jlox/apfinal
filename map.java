@@ -31,6 +31,46 @@ public class map{
     public void makehome(){
 	r = 0;
 	while (r < 10){
+	    if (r = 0){
+		home[r]=makeroof(19);
+	    } else {
+		if (r = 1) {
+		    home[r]=home1[];
+		}
+	    } else {
+		if (r = 2) {
+		    home[r]=home2[];
+		}
+	    } else {
+		if (r = 3) {
+		    home[r]=home3[];
+		}
+	    } else {
+		if (r = 4) {
+		    home[r]=home4[];
+		}
+	    } else {
+		if (r = 5) {
+		    home[r]=home5[];
+		}
+	    } else {
+		if (r = 6) {
+		    home[r]=home6[];
+		}
+	    } else {
+		if (r = 7) {
+		    home[r]=home7[];
+		}
+	    } else {
+		if (r = 8) {
+		    home[r]=home8[];
+		}
+	    } else {
+		if (r = 9) {
+		    home[r]=makefloor(19);
+		}
+	    }
+	    r = r + 1;
 	}
     }
 }
