@@ -8,7 +8,9 @@ public class testmap extends JFrame implements ActionListener{
     private JTextArea text = new JTextArea();
     private JPanel canvas;
     String swagger = "what??";
-
+    mapmaker g = new mapmaker();
+    int ycor;
+    int xcor;
 
 
 
@@ -16,8 +18,8 @@ public class testmap extends JFrame implements ActionListener{
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
 	pane.setLayout(new FlowLayout());
-	text.setColumns(40);
-	text.setRows(10);
+	text.setColumns(50);
+	text.setRows(30);
 	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
 	text.setEditable(false);
 	pane.add(text);
@@ -31,22 +33,46 @@ public class testmap extends JFrame implements ActionListener{
 		
 	public void keyPressed(KeyEvent e) {
 	    int c = e.getKeyCode();
-
+	    if (c == KeyEvent.VK_SPACE){
+		g.board[1][1] = '▓';
+		xcor = 1;
+		ycor = 1;
+	    }
 	    if (c == KeyEvent.VK_LEFT){
-		swagger = "left!!" + "\n wow";
+		if (xcor - 1 >= 0) {
+		g.board[ycor][xcor] = '▒';
+		xcor = xcor - 1;
+		g.board[ycor][xcor] = '▓';
+		swagger = g.toString();
 		text.setText(swagger);
+		}
 	    }
 	    if (c == KeyEvent.VK_RIGHT){
-		swagger = "right!!";
-		text.setText(swagger);
+		if (xcor + 1 < 10) {
+		    g.board[ycor][xcor] = '▒';
+		    xcor = xcor + 1;
+		    g.board[ycor][xcor] = '▓';
+		    swagger = g.toString();
+		    text.setText(swagger);
+		}
 	    }
 	    if (c == KeyEvent.VK_UP){
-		swagger = "up!!";
-		text.setText(swagger);
+		if (ycor - 1 >= 0) {
+		    g.board[ycor][xcor] = '▒';
+		    ycor = ycor - 1;
+		    g.board[ycor][xcor] = '▓';
+		    swagger = g.toString();
+		    text.setText(swagger);
+		}
 	    }
 	    if (c == KeyEvent.VK_DOWN){
-		swagger = "down!!";
-		text.setText(swagger);
+		if (ycor + 1 < 10) {
+		    g.board[ycor][xcor] = '▒';
+		    ycor = ycor + 1;
+		    g.board[ycor][xcor] = '▓';
+		    swagger = g.toString();
+		    text.setText(swagger);
+		}
 	    }
 	}
 
@@ -57,8 +83,6 @@ public class testmap extends JFrame implements ActionListener{
 
     public static void main(String[] args) {
 	testmap f = new testmap();
-	mapmaker x = new mapmaker();
-	System.out.println(x.board);
 	f.setTitle("Testmap");
 	f.setSize(600,400);
 	f.setVisible(true);
