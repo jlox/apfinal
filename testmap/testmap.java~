@@ -1,0 +1,70 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class testmap extends JFrame implements ActionListener {
+
+    private Container pane;
+    private JLabel l;
+    private JTextArea text;
+    private JPanel canvas;
+    private JCheckBox box;
+    private int x = 10;
+    private int y = 10;
+
+
+    private class Key implements KeyListener {
+	public void keyPressed(KeyEvent e){}
+	public void keyReleased(KeyEvent e){}
+	public void keyTyped(KeyEvent e){
+	    if (box.isSelected()){
+		String s = text.getText();
+		s = s.toUpperCase();
+		text.setText(s);
+	    }
+	}
+    }
+		
+    public void actionPerformed(ActionEvent e) {
+	if (e.getSource() == b1){
+	    System.out.println("You clicked click me");
+	    System.out.println("By the way, the text box has: "+text.getText());
+	    System.out.println();
+	    x = x + 5;
+	    y = y + 5;
+	    canvas.update(canvas.getGraphics());
+	} else if (e.getSource() == b2) {
+	    System.out.println("Shutting down");
+	    System.exit(0);
+	} else if (e.getSource() == labeler){
+	    l.setText(text.getText());
+	    //JLabel l2 = new JLabel(text.getText());
+	    //pane.add(l2);
+	}
+    }
+		
+    public Gui2(){
+
+	setTitle("My First Gui");
+	setSize(600,600);
+	setLocation(100,100);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+	pane = getContentPane();
+	//pane.setLayout(new GridLayout(3,3));
+	pane.setLayout(new FlowLayout());
+	pane.add(box);
+	text = new JTextArea();
+	text.setColumns(40);
+	text.setRows(10);
+	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
+	text.addKeyListener(new Key());
+	pane.add(text);
+				
+    }
+		
+    public static void main(String[] args) {
+	Gui2 f = new Gui2();
+	f.setVisible(true);
+    }
+}
