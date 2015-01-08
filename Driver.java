@@ -3,7 +3,7 @@ public class Driver {
     public static void main(String[] args){
 	guimon f = new guimon();
 	f.setTitle("POKEMON: JAVA EDITION");
-	f.setSize(500,500);
+	f.setSize(400,600);
 	f.setVisible(true);
 	f.text.setRows(f.getyBound());
 	f.text.setColumns(f.getxBound());

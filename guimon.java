@@ -108,8 +108,8 @@ public class guimon extends JFrame implements ActionListener{
 			text.setText(swagger);
 			ycor = 9;
 			xcor = 10;
-			allowedBlock = '#';
-			oldtile = '#';
+			allowedBlock = '.';
+			oldtile = '.';
 		    }
 		    
 		    if ((mapnum == 1) && (ycor == 8) && (xcor == 10)) {
