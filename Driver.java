@@ -1,7 +1,14 @@
 import java.util.*;
 public class Driver {
     public static void main(String[] args){
-	Scanner scanner = new Scanner(System.in);
+	guimon f = new guimon();
+	f.setTitle("POKEMON: JAVA EDITION");
+	f.setSize(500,500);
+	f.setVisible(true);
+	f.text.setRows(f.getyBound());
+	f.text.setColumns(f.getxBound());
+    
+   	Scanner scanner = new Scanner(System.in);
 	String newName;
 	String starter;
 	String attackMethod;
@@ -10,28 +17,40 @@ public class Driver {
 	
 	//INTRODUCTION
 	System.out.println();
-
-	starter = pokeSelect().toLowerCase();
+	
+	starter = pokeSelect(f).toLowerCase();
 	newName = nameSelect().toUpperCase();
 
-	System.out.println(starter + newName);
-
-	charmander poke1 = new charmander();
+	charmander poke1 = new charmander("Jeanne");
 
 	System.out.println("You are a "+starter.toLowerCase()+" named "+newName.toUpperCase()+".");
     }
 
-	public static String pokeSelect() {
+	public static String pokeSelect(guimon other) {
 	    Scanner scanner = new Scanner(System.in);
 	    String starter = new String();
-	    System.out.println();
-	    System.out.println("You have the choice of one of 3 different starter Pokemon!");
-	    System.out.println();
-	    System.out.println("Which Pokemon do you want to select?");
-	    System.out.println("If left blank, you will be defaulted to CHARMANDER.");
-	    System.out.println("-> BULBASAUR - GRASS type");
-	    System.out.println("-> CHARMANDER - FIRE type");
-	    System.out.println("-> SQUIRTLE - WATER type");
+	    other.dialogue.setText("You have the choice of one of 3 different starter"+" \n"+"Pokemon!"+ "\n \n");
+
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
+	    try {
+		for (int i=0;i<5;i++){
+		    Thread.sleep(200);
+		}
+		Thread.sleep(1000);
+	    } catch(InterruptedException ex) {
+		Thread.currentThread().interrupt();
+	    }
+	    other.dialogue.append("Which Pokemon do you want to select?" + "\n");
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
+	    other.dialogue.append("If left blank, you will be defaulted to CHARMANDER." + "\n");
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
+	    
+	    other.dialogue.append("-> BULBASAUR - GRASS type" + "\n");
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
+	    other.dialogue.append("-> CHARMANDER - FIRE type" + "\n");
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
+	    other.dialogue.append("-> SQUIRTLE - WATER type" + "\n");
+	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
 	    starter = scanner.nextLine();
 	    if (starter.equals("")) {
 		starter = "bulbasaur";

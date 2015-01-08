@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class guimon extends JFrame implements ActionListener{
-    JTextField textField = new JTextField(30);
+
     Container pane;
     JTextArea text = new JTextArea();
     JPanel canvas;
@@ -68,7 +68,7 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	swagger = currentMap;
 	text.setText(swagger);
-	pane.add(textField);
+
     }
 		
  
@@ -90,6 +90,7 @@ public class guimon extends JFrame implements ActionListener{
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
+
 		}
 	}
     
