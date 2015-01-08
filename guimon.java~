@@ -1,0 +1,125 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class guimon extends JFrame implements ActionListener{
+
+    private Container pane;
+    private JTextArea text = new JTextArea();
+    private JPanel canvas;
+    String swagger = "what??";
+    map g = new map();
+    int ycor;
+    int xcor;
+    int ybound;
+    int xbound;
+    int mapnum = 0;
+    String currentMap;
+
+    public void getBoundaries(){
+	ybound = g.home[0].length;
+	xbound = g.home.length;
+    }
+    public void getCurrentMap(){
+	if (mapnum == 0){
+	    currentMap = g.showMap(g.home);
+	}
+    }
+
+    // To implement:
+    
+    /* Make a getCurrentMap function that will check the currentMap variable
+       and then based on that will pull the specific map (ex. g.board) for
+       moving around in.
+
+     */
+
+
+    public guimon(){
+	g.makehome();
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	pane = getContentPane();
+	pane.setLayout(new FlowLayout());
+	text.setColumns(0);
+	text.setRows(30);
+	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
+	text.setEditable(false);
+	Font font = new Font("Monospaced", Font.PLAIN, 20);
+	text.setFont(font);
+	pane.add(text);
+	text.addKeyListener(new Key());
+    }
+		
+ 
+    public void actionPerformed(ActionEvent e) {}
+
+    public class Key implements KeyListener {
+		
+	public void keyPressed(KeyEvent e) {
+	    int c = e.getKeyCode();
+	    if (c == KeyEvent.VK_SPACE){
+		g.home[1][1] = '@';
+		xcor = 1;
+		ycor = 1;
+	    }
+	    if (c == KeyEvent.VK_LEFT){
+		getBoundaries();
+		if (xcor - 1 > 0) {
+		    g.home[ycor][xcor] = ' ';
+		    xcor = xcor - 1;
+		    g.home[ycor][xcor] = '@';
+		    getCurrentMap();
+		    swagger = currentMap;
+		    text.setText(swagger);
+		}
+	    }
+	    if (c == KeyEvent.VK_RIGHT){
+		getBoundaries();
+		if (xcor + 1 < xbound - 1) {
+		    g.home[ycor][xcor] = ' ';
+		    xcor = xcor + 1;
+		    g.home[ycor][xcor] = '@';
+		    getCurrentMap();
+		    swagger = currentMap;
+		    text.setText(swagger);
+		}
+	    }
+	    if (c == KeyEvent.VK_UP){
+		getBoundaries();
+		if (ycor - 1 > 0 && (g.home[ycor - 1][xcor] != '_')) {
+		    g.home[ycor][xcor] = ' ';
+		    ycor = ycor - 1;
+		    g.home[ycor][xcor] = '@';
+		    getCurrentMap();
+		    swagger = currentMap;
+		    text.setText(swagger);
+		}
+	    }
+	    if (c == KeyEvent.VK_DOWN){
+		getBoundaries();
+		if (ycor + 1 < ybound - 1) {
+		    g.home[ycor][xcor] = ' ';
+		    ycor = ycor + 1;
+		    g.home[ycor][xcor] = '@';
+		    getCurrentMap();
+		    swagger = currentMap;
+		    text.setText(swagger);
+		}
+	    }
+	}
+
+	public void keyReleased(KeyEvent e){}
+	public void keyTyped(KeyEvent e){}
+    }
+
+
+    public static void main(String[] args) {
+	guimon f = new guimon();
+	f.setTitle("POKEMON: JAVA EDITION");
+	f.setSize(500,500);
+	f.setVisible(true);
+    
+    }
+
+
+}
