@@ -1,8 +1,8 @@
 import java.util.Random;
-public class bulbasaur extends pokemon {
+public class squirtle extends pokemon {
     Random randomNumber = new Random();
-    String type = "GRASS";
-    public charmander (String n){
+    String type = "WATER";
+    public squirtle (String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
@@ -10,15 +10,15 @@ public class bulbasaur extends pokemon {
     }
 
     //basics
-    public void cut(pokemon other){
+    public void watergun(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " CUTS "+other);
+	System.out.println(this.getName() + " WATERGUNS  "+other);
 	other.setDefending(true);
     }
 
-    public void vinewhip(pokemon other){
-	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	System.out.prinlnt(this.getName() + " VINEWHIPS " +other);
+    public void surf(pokemon other){
+	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
+	System.out.prinlnt(this.getName() + " SURF  " +other);
 	other.setDefending(true);
     }
 
