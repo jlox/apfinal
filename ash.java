@@ -3,8 +3,8 @@ public class ash extends basechar{
     public void inputName(String name){
 	super.inputName(name);
     }
+
     public String getName(){
 	return super.getName();
-    }
-    
+    } 
 }
