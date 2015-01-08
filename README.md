@@ -48,3 +48,9 @@ Division of work:
 /Together:
 > figure out ascii field thing
 > how to have screen update?
+
+1/7/2015
+=======
+- Added new pokemons, created maps (arrays and 2d arrays that hold them), figured out how to "connect" maps so that you can move from one to another
+- Gui works more; added text component
+- Created functions that add arrays to make maps
