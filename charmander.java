@@ -1,6 +1,7 @@
 import java.util.Random;
 public class charmander extends pokemon {
     Random randomNumber = new Random();
+    String type = "FIRE";
     public charmander(String n) {
 	setStrength(50);
 	setHealth(100);
@@ -9,19 +10,16 @@ public class charmander extends pokemon {
     }
 
 // basic attacks
-    public void slash(pokemon other)
-    {
+    public void scratch(pokemon other) {	
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20)); 
 	System.out.println(this.getName() + " SLASHES " +other);
 	other.setDefending(true);
     }
-    /* 
-     Bash sets the attack strength, which is one tenth of the strength + a random integer from 0 to 20.
-     After it sets the attack strength, it sets the opponent's defending variable to true. This will trigger the opponent to defend.
-     When the opponent attacks, a similar thing happens. The defending variable is set to true, thus triggering the option of using your shield. 
-     Maybe we should add more defense methods? The defense method then reduces the attack strength by a certain amount. I put it as strength/9 + random int from 0 to 20.
-     Finally, the damage is given 
-    */
+
+    public void megakick(pokemon other){
+	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
+	System.out.println(this.getName() + " MEGAKICKS " +other);
+	other.setDefending(true);
 
     public void dodge(pokemon other)
     {
@@ -48,3 +46,10 @@ public class charmander extends pokemon {
 	other.setAttackStrength(0);
     }
 }
+    /* 
+     Bash sets the attack strength, which is one tenth of the strength + a random integer from 0 to 20.
+     After it sets the attack strength, it sets the opponent's defending variable to true. This will trigger the opponent to defend.
+     When the opponent attacks, a similar thing happens. The defending variable is set to true, thus triggering the option of using your shield. 
+     Maybe we should add more defense methods? The defense method then reduces the attack strength by a certain amount. I put it as strength/9 + random int from 0 to 20.
+     Finally, the damage is given 
+    */
