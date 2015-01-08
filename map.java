@@ -198,9 +198,6 @@ public class map{
 	    else if (r == 12){
 		sec[r] = se12;
 	    }
-	    else if (r == 13){
-		sec[r] = se13;
-	    }
 	    r = r + 1;
 	}
     }
