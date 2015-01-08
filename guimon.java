@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class guimon extends JFrame implements ActionListener{
+
     JTextField textField = new JTextField(30);
     Container pane;
     JTextArea text = new JTextArea();
@@ -16,26 +17,33 @@ public class guimon extends JFrame implements ActionListener{
     String swagger = "what??";
     map g = new map();
     char oldtile = ' ';
+    char allowedBlock = ' ';
+    char door = '+';
     int ybound;
     int xbound;
     int mapnum = 0;
     String currentMap;
+    char[][] defaultMap;
 
     public void getBoundaries(){
-	ybound = g.home.length;
-	xbound = g.home[0].length;
+	ybound = defaultMap.length;
+	xbound = defaultMap[0].length;
     }
     public int getyBound(){
-	return g.home.length;
+	return defaultMap.length;
     }
     public int getxBound(){
-	return g.home[0].length;
+	return defaultMap[0].length;
     }
 
 
     public void getCurrentMap(){
 	if (mapnum == 0){
 	    currentMap = g.showMap(g.home);
+	    defaultMap = g.home;
+	} else if (mapnum == 1){
+	    currentMap = g.showMap(g.first);
+	    defaultMap = g.first;
 	}
     }
 
@@ -49,7 +57,10 @@ public class guimon extends JFrame implements ActionListener{
 
 
     public guimon(){
+	getCurrentMap();
 	g.makehome();
+	g.makefirst();
+
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
 	pane.setLayout(new FlowLayout());
@@ -78,19 +89,50 @@ public class guimon extends JFrame implements ActionListener{
 		
 	public void direction(int x, int y){
 	    getBoundaries();
+	    
+	    
 	    if ((xcor - x > 0) && (xcor - x < xbound - 1) &&
 		(ycor - y > 0) && (ycor - y < ybound - 1) && 
-		(g.home[ycor-y][xcor-x] == ' ')) 
-		{
-		g.home[ycor][xcor] = oldtile;
+		((defaultMap[ycor-y][xcor-x] == allowedBlock) || 
+		 (defaultMap[ycor-y][xcor-x] == door))) {
+		defaultMap[ycor][xcor] = oldtile;
 		xcor = xcor - x;
 		ycor = ycor - y;
-		oldtile = g.home[ycor][xcor];
-		g.home[ycor][xcor] = '@';
+		oldtile = defaultMap[ycor][xcor];
+
+		if (defaultMap[ycor][xcor] == '+'){
+		    if (mapnum == 0){
+			mapnum = 1;
+			getCurrentMap();
+			swagger = currentMap;
+			text.setText(swagger);
+			ycor = 9;
+			xcor = 10;
+			allowedBlock = '#';
+			oldtile = '#';
+		    }
+		    
+		    if ((mapnum == 1) && (ycor == 8) && (xcor == 10)) {
+			mapnum = 0;
+			getCurrentMap();
+			swagger = currentMap;
+			text.setText(swagger);
+			ycor = 1;
+			xcor = 16;
+			allowedBlock = ' ';
+			oldtile = ' ';
+		    }
+			
+		}
+		
+		defaultMap[ycor][xcor] = '@';
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
-		}
+		
+		
+	    }
+	    
 	}
     
 

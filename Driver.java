@@ -7,7 +7,7 @@ public class Driver {
 	f.setVisible(true);
 	f.text.setRows(f.getyBound());
 	f.text.setColumns(f.getxBound());
-    
+	/*
    	Scanner scanner = new Scanner(System.in);
 	String newName;
 	String starter;
@@ -21,7 +21,7 @@ public class Driver {
 	starter = pokeSelect(f).toLowerCase();
 	newName = nameSelect().toUpperCase();
 
-	charmander poke1 = new charmander("Jeanne");
+	//charmander poke1 = new charmander("Jeanne");
 
 	System.out.println("You are a "+starter.toLowerCase()+" named "+newName.toUpperCase()+".");
     }
@@ -87,5 +87,7 @@ public class Driver {
 	    }
 	    return newName;
 	}
+	*/
+    }
 }
 
