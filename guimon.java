@@ -4,11 +4,14 @@ import java.awt.event.*;
 
 public class guimon extends JFrame implements ActionListener{
 
-    private Container pane;
-    private JTextArea text = new JTextArea();
-    private JPanel canvas;
+    Container pane;
+    JTextArea text = new JTextArea();
+    JPanel canvas;
+    JTextArea dialogue = new JTextArea();
+    JScrollPane scroll = new JScrollPane(dialogue, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    boolean canMove = true;
     int ycor = 5;
-    int xcor = 5;
+    int xcor = 3;
     String swagger = "what??";
     map g = new map();
     char oldtile = ' ';
@@ -49,14 +52,21 @@ public class guimon extends JFrame implements ActionListener{
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
 	pane.setLayout(new FlowLayout());
-	text.setColumns(30);
-	text.setRows(30);
+	text.setColumns(getxBound());
+	text.setRows(getyBound());
 	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
 	text.setEditable(false);
 	Font font = new Font("Monospaced", Font.PLAIN, 20);
 	text.setFont(font);
 	pane.add(text);
 	text.addKeyListener(new Key());
+	dialogue.setRows(6);
+	dialogue.setColumns(30);
+	dialogue.setEditable(false);
+	pane.add(scroll);
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
     }
 		
  
@@ -84,34 +94,24 @@ public class guimon extends JFrame implements ActionListener{
 
 	public void keyPressed(KeyEvent e) {
 	    int c = e.getKeyCode();
-	    if (c == KeyEvent.VK_LEFT){
-		direction(1,0);
-	    }
-	    if (c == KeyEvent.VK_RIGHT){
-		direction(-1,0);
-	    }
-	    if (c == KeyEvent.VK_UP){
-		direction(0,1);
-	    }
-	    if (c == KeyEvent.VK_DOWN){
-		direction(0,-1);
+	    if (canMove){
+		if (c == KeyEvent.VK_LEFT){
+		    direction(1,0);
+		}
+		if (c == KeyEvent.VK_RIGHT){
+		    direction(-1,0);
+		}
+		if (c == KeyEvent.VK_UP){
+		    direction(0,1);
+		}
+		if (c == KeyEvent.VK_DOWN){
+		    direction(0,-1);
+		}
 	    }
 	}
 
 	public void keyReleased(KeyEvent e){}
 	public void keyTyped(KeyEvent e){}
     }
-
-
-    public static void main(String[] args) {
-	guimon f = new guimon();
-	f.setTitle("POKEMON: JAVA EDITION");
-	f.setSize(500,500);
-	f.setVisible(true);
-	f.text.setRows(f.getyBound());
-	f.text.setColumns(f.getxBound());
-    
-    }
-
 
 }

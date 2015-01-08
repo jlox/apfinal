@@ -154,13 +154,13 @@ public class map{
 		first[r] = firs16;
 	    }
 	    else if (r == 17){
-		first[r] = firs17;
+		first[r] = first17;
 	    }
 	    else if (r == 18){
-		first[r] = firs18;
+		first[r] = first18;
 	    }
 	    else if (r == 19){
-		first[r] = firs19;
+		first[r] = first19;
 	    }
 	}
     }

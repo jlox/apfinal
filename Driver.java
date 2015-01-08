@@ -1,7 +1,14 @@
 import java.util.*;
 public class Driver {
     public static void main(String[] args){
-	Scanner scanner = new Scanner(System.in);
+	guimon f = new guimon();
+	f.setTitle("POKEMON: JAVA EDITION");
+	f.setSize(500,500);
+	f.setVisible(true);
+	f.text.setRows(f.getyBound());
+	f.text.setColumns(f.getxBound());
+    
+   	Scanner scanner = new Scanner(System.in);
 	String newName;
 	String starter;
 	String attackMethod;
@@ -10,13 +17,13 @@ public class Driver {
 	
 	//INTRODUCTION
 	System.out.println();
-
+	
 	starter = pokeSelect().toLowerCase();
 	newName = nameSelect().toUpperCase();
 
 	System.out.println(starter + newName);
-
-	charmander poke1 = new charmander();
+	f.dialogue.append("hey");
+	charmander poke1 = new charmander("Jeanne");
 
 	System.out.println("You are a "+starter.toLowerCase()+" named "+newName.toUpperCase()+".");
     }
