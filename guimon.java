@@ -44,7 +44,11 @@ public class guimon extends JFrame implements ActionListener{
 	} else if (mapnum == 1){
 	    currentMap = g.showMap(g.first);
 	    defaultMap = g.first;
+	} else if (mapnum == 2){
+	    currentMap = g.showMap(g.sec);
+	    defaultMap = g.sec;
 	}
+
     }
 
     // To implement:
@@ -60,6 +64,7 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	g.makehome();
 	g.makefirst();
+	g.makesec();
 
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
@@ -107,12 +112,12 @@ public class guimon extends JFrame implements ActionListener{
 			swagger = currentMap;
 			text.setText(swagger);
 			ycor = 9;
-			xcor = 10;
-			allowedBlock = '.';
-			oldtile = '.';
+			xcor = 13;
+			allowedBlock = ' ';
+			oldtile = ' ';
 		    }
 		    
-		    if ((mapnum == 1) && (ycor == 8) && (xcor == 10)) {
+		    if ((mapnum == 1) && (ycor == 8) && (xcor == 13)) {
 			mapnum = 0;
 			getCurrentMap();
 			swagger = currentMap;
@@ -122,7 +127,28 @@ public class guimon extends JFrame implements ActionListener{
 			allowedBlock = ' ';
 			oldtile = ' ';
 		    }
-			
+		    
+		    if ((mapnum == 1) && (ycor == 1) && (xcor == 19)) {
+			mapnum = 2;
+			getCurrentMap();
+			swagger = currentMap;
+			text.setText(swagger);
+			ycor = 10;
+			xcor = 19;
+			allowedBlock = ' ';
+			oldtile = ' ';
+		    }
+		    
+		    if ((mapnum == 2) && (ycor == 11) && (xcor == 19)) {
+			mapnum = 1;
+			getCurrentMap();
+			swagger = currentMap;
+			text.setText(swagger);
+			ycor = 2;
+			xcor = 19;
+			allowedBlock = ' ';
+			oldtile = ' ';
+		    }
 		}
 		
 		defaultMap[ycor][xcor] = '@';
@@ -132,8 +158,9 @@ public class guimon extends JFrame implements ActionListener{
 		
 		
 	    }
-	    
 	}
+	    
+	    
     
 
 	public void keyPressed(KeyEvent e) {
