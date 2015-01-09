@@ -54,3 +54,8 @@ Division of work:
 - Added new pokemons, created maps (arrays and 2d arrays that hold them), figured out how to "connect" maps so that you can move from one to another
 - Gui works more; added text component
 - Created functions that add arrays to make maps
+1/9/2015
+=======
+- Edited pokemon files, added more attacks
+- Worked on map, added lab interior
+- Worked on guimon.java, added dynamic input dialogue box
