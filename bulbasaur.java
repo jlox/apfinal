@@ -22,6 +22,13 @@ public class bulbasaur extends pokemon {
 	other.setDefending(true);
     }
 
+    public void leafstorm(pokemon other){
+	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
+	System.out.println(this.getName() + "USES LEAF STORM ON " +other);
+	other.setDefending(true);
+    }
+
+    //not actual use; used when attacked, see if misses
     public void dodge(pokemon other){
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
 	if (other.getAttackStrength() < 15){
@@ -30,6 +37,7 @@ public class bulbasaur extends pokemon {
 	other.assignDamage(this);
     }
 
+    /*
     public void run (pokemon other){
 	boolean escape = randomNumber.nextInt(150) < this.getStrength();
 	if (escape) {
@@ -39,5 +47,5 @@ public class bulbasaur extends pokemon {
 	}
 	other.setAttackStrength(0);
     }
-
+    */
 }

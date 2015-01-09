@@ -36,7 +36,21 @@ public class guimon extends JFrame implements ActionListener{
     String attackMethod;
     boolean encounter;
     String currentString;
+    int nomorenamesplz = 0;
 
+    // RIVAL SETUP
+    String rivalName = "";
+    String rivalStarter;
+
+    // INPUT SETUP
+    boolean input1 = true;
+    boolean input2 = false;
+    boolean input3 = false;
+    boolean input4 = false;
+
+    // YOU SHALL NOT PASS
+    boolean door1 = false;
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -96,13 +110,27 @@ public class guimon extends JFrame implements ActionListener{
         send.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		    String input = JOptionPane.showInputDialog(guimon.this, "Please enter an input:");
-		    if((input != null) && !input.isEmpty() && whichInput == 0) {
-			newName = input;
-			canMove = true;
-		    } else if (input.isEmpty()){
-			newName = "ASH";
-			canMove = true;
+		    if (input1){
+			String input = JOptionPane.showInputDialog(guimon.this, "Please enter your name:");
+			if ((input != null) && !input.isEmpty()){
+			    newName = input.toUpperCase();
+			    canMove = true;
+			} else if (input.isEmpty()) {
+			    newName = "ASH";
+			    canMove = true;
+			}
+			input1 = false;
+		    }
+		    if (input2){
+			String input = JOptionPane.showInputDialog(guimon.this, "Please enter your rival's name:");
+			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
+			    rivalName = input.toUpperCase();
+			    canMove = true;
+			} else if (input.isEmpty()/* && whichInput == 1*/) {
+			    rivalName = "GARY";
+			    canMove = true;
+			}
+			input2 = false;
 		    }
 		}
 	    });
@@ -119,6 +147,7 @@ public class guimon extends JFrame implements ActionListener{
 	public void direction(int x, int y){
 	    getBoundaries();
 	    	    
+	    // REGULAR MOVEMENT
 	    if ((xcor - x > 0) && (xcor - x < xbound - 1) &&
 		(ycor - y > 0) && (ycor - y < ybound - 1) && 
 		((defaultMap[ycor-y][xcor-x] == allowedBlock) || 
@@ -127,14 +156,30 @@ public class guimon extends JFrame implements ActionListener{
 		xcor = xcor - x;
 		ycor = ycor - y;
 		oldtile = defaultMap[ycor][xcor];
+
+		// DIALOGUE TRIGGERS
 		if ((mapnum == 0) && 
 		    (ycor == 1) && 
 		    (xcor == 16) && 
 		    (newName == "")) {
 		    canMove = false;
 		    nameSelect();
-		    dialogue.append(newName);
 		}
+		if ((mapnum == 1) &&
+		    (ycor == 11) &&
+		    (xcor == 13) &&
+		    (rivalName == "")) {
+		    canMove = false;
+		    input2 = true;
+		    rivalSelect();
+		}
+		if ((mapnum == 1) &&
+		    (ycor == 11) &&
+		    (xcor == 13)) {
+
+		}
+
+
 		// DOOR FUNCTIONS
 		if (defaultMap[ycor][xcor] == '+'){
 		    if (mapnum == 0){
@@ -147,10 +192,11 @@ public class guimon extends JFrame implements ActionListener{
 			    xcor = 13;
 			    allowedBlock = ' ';
 			    oldtile = ' ';
+			    dialogue.append("Your name is "+newName+"."+"\n"+" ");
+			    dialogue.append("Your rival's name is "+rivalName+"."+"\n"+" ");
 			}
-
 		    }
-		    
+		    		   
 		    if (mapnum == 1){
 			if ((ycor == 8) && (xcor == 13)) {
 			    mapnum = 0;
@@ -192,8 +238,8 @@ public class guimon extends JFrame implements ActionListener{
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
-		if (xcor == 5){
-		    dialogue.append(newName+"\n");
+		if (xcor == 5 && newName != ""){
+		    dialogue.append(newName+"\n"+" ");
 		}
 	    }
 	}
@@ -201,18 +247,33 @@ public class guimon extends JFrame implements ActionListener{
     // STORYLINE + DIALOGUE FUNCTIONS
 
 	public void nameSelect() {
-	    String newline = "\n";
+	    String newline = "\n" + " ";
 	    String g1 = " Welcome to the world of Pokemon!";
-	    String g2 = " Before we begin our adventure, what is your name?";
-	    String g3 = " If left blank, you will be defaulted to ASH.";
+	    String g2 = "Before we begin our adventure, what is your name?";
+	    String g3 = "If left blank, you will be defaulted to ASH.";
 	    String parsing[] = {"...","...","..."};
 	    String newName = new String();
 	    dialogue.append(g1+newline);
 	    dialogue.append(g2+newline);
-	    dialogue.append("Please open the INPUT box and type your name." + "\n");
+	    dialogue.append("Please open the INPUT box and type your name." + newline);
+	    dialogue.append("When you are done, click the red GAME SCREEN" +newline+"to resume." + newline);
 	    dialogue.append(g3+newline);
-
 	}
+
+	public void rivalSelect() {
+	    String newline = "\n"+" ";
+	    String g1 = "Oh wait! What's your RIVAL's name?";
+	    String g2 = "Please open the INPUT box and type his name.";
+	    String g3 = "Afterwards, click the red GAME SCREEN to resume.";
+	    String g4 = "If left blank, he will be defaulted to GARY";
+
+	    dialogue.append(g1+newline);
+	    dialogue.append(g2+newline);
+	    dialogue.append(g3+newline);
+	    dialogue.append(g4+newline);
+	    
+	}
+		
 
 	
   
@@ -245,7 +306,7 @@ public class guimon extends JFrame implements ActionListener{
     // DRIVER
     public static void main(String[] args){
 	guimon f = new guimon();
-	f.setTitle("POKEMON: JAVA EDITION");
+	f.setTitle("JAVA-MON");
 	f.setSize(400,600);
 	f.setVisible(true);
 	f.text.setRows(f.getyBound());
