@@ -1,8 +1,8 @@
 import java.util.Random;
-public class squirtle extends pokemon {
+public class pikachu extends pokemon{
     Random randomNumber = new Random();
-    String type = "WATER";
-    public squirtle (String n){
+    String type = "ELECTRIC";
+    public pikachu(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
@@ -10,25 +10,24 @@ public class squirtle extends pokemon {
     }
 
     //basics
-    public void watergun(pokemon other){
+    public void headbutt(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " WATERGUNS  "+other);
+	System.out.println(this.getName() + " HEADBUTTS " +other);
 	other.setDefending(true);
     }
 
-    public void surf(pokemon other){
-	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
-	System.out.prinlnt(this.getName() + " SURF  " +other);
+    public void voltswitch(pokemon other){
+	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
+	System.out.println(this.getName() + " USES VOLT SWITCH ON " +other);
 	other.setDefending(true);
     }
 
-    public void waterspout(pokemon other){
+    public void thunder(pokemon other){
 	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName + " USES WATER SPOUT ON " +other);
+	System.out.println(this.getName() + " USES THUNDER ON " +other);
 	other.setDefending(true);
     }
 
-    //not actual use; used when attacked, see if misses
     public void dodge(pokemon other){
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
 	if (other.getAttackStrength() < 15){

@@ -2,14 +2,14 @@ import java.util.Random;
 public class charmander extends pokemon {
     Random randomNumber = new Random();
     String type = "FIRE";
-    public charmander(String n) {
+    public charmander(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
     }
 
-// basic attacks
+    //basics
     public void scratch(pokemon other) {	
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20)); 
 	System.out.println(this.getName() + " SLASHES " +other);
@@ -20,7 +20,15 @@ public class charmander extends pokemon {
 	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
 	System.out.println(this.getName() + " MEGAKICKS " +other);
 	other.setDefending(true);
+    }
 
+    public void focuspunch(pokemon other){
+	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
+	System.out.println(this.getName() + " USES FOCUS PUNCH ON " +other);
+	other.setDefending(true);
+    }
+
+    //not actual use; used when attacked, see if misses
     public void dodge(pokemon other)
     {
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
@@ -32,6 +40,8 @@ public class charmander extends pokemon {
 	other.assignDamage(this);
 	
     }
+
+    /*
     public void run (pokemon other)
     {
 	boolean escape = randomNumber.nextInt(150) < this.getStrength();
@@ -45,11 +55,5 @@ public class charmander extends pokemon {
 	    }
 	other.setAttackStrength(0);
     }
-}
-    /* 
-     Bash sets the attack strength, which is one tenth of the strength + a random integer from 0 to 20.
-     After it sets the attack strength, it sets the opponent's defending variable to true. This will trigger the opponent to defend.
-     When the opponent attacks, a similar thing happens. The defending variable is set to true, thus triggering the option of using your shield. 
-     Maybe we should add more defense methods? The defense method then reduces the attack strength by a certain amount. I put it as strength/9 + random int from 0 to 20.
-     Finally, the damage is given 
     */
+}
