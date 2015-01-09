@@ -7,12 +7,8 @@ public class Driver {
 	f.setVisible(true);
 	f.text.setRows(f.getyBound());
 	f.text.setColumns(f.getxBound());
-	while(f.talk){
-	    if (f.xcor == 5) {
-	    f.dialogue.append("Hello");
-	    other.dialogue.setCaretPosition(other.dialogue.getDocument().getLength());
-	    }
-	}
+	
+
 	/*
    	Scanner scanner = new Scanner(System.in);
 	String newName;
