@@ -38,11 +38,19 @@ public class guimon extends JFrame implements ActionListener{
     String currentString;
     int nomorenamesplz = 0;
 
-    //RIVAL SETUP
+    // RIVAL SETUP
     String rivalName = "";
     String rivalStarter;
-    
 
+    // INPUT SETUP
+    boolean input1 = true;
+    boolean input2 = false;
+    boolean input3 = false;
+    boolean input4 = false;
+
+    // YOU SHALL NOT PASS
+    boolean door1 = false;
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -102,21 +110,27 @@ public class guimon extends JFrame implements ActionListener{
         send.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		    String input1 = JOptionPane.showInputDialog(guimon.this, "Please enter your name:");
-		    String input2 = JOptionPane.showInputDialog(guimon.this, "Please enter your rival's name:");
-		    if ((input1 != null) && !input1.isEmpty()){
-			newName = input1.toUpperCase();
-			canMove = true;
-		    } else if (input1.isEmpty()/* && whichInput == 0*/) {
-			newName = "ASH";
-			canMove = true;
+		    if (input1){
+			String input = JOptionPane.showInputDialog(guimon.this, "Please enter your name:");
+			if ((input != null) && !input.isEmpty()){
+			    newName = input.toUpperCase();
+			    canMove = true;
+			} else if (input.isEmpty()) {
+			    newName = "ASH";
+			    canMove = true;
+			}
+			input1 = false;
 		    }
-		    if ((input2 != null) && !input2.isEmpty()/* && whichInput == 1*/){
-			rivalName = input2.toUpperCase();
-			canMove = true;
-		    } else if (input2.isEmpty()/* && whichInput == 1*/) {
-			rivalName = "GARY";
-			canMove = true;
+		    if (input2){
+			String input = JOptionPane.showInputDialog(guimon.this, "Please enter your rival's name:");
+			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
+			    rivalName = input.toUpperCase();
+			    canMove = true;
+			} else if (input.isEmpty()/* && whichInput == 1*/) {
+			    rivalName = "GARY";
+			    canMove = true;
+			}
+			input2 = false;
 		    }
 		}
 	    });
@@ -152,24 +166,17 @@ public class guimon extends JFrame implements ActionListener{
 		    nameSelect();
 		}
 		if ((mapnum == 1) &&
-		    (ycor == 12) &&
+		    (ycor == 11) &&
 		    (xcor == 13) &&
 		    (rivalName == "")) {
 		    canMove = false;
+		    input2 = true;
 		    rivalSelect();
 		}
 		if ((mapnum == 1) &&
 		    (ycor == 11) &&
 		    (xcor == 13)) {
-		    /* if (nomorenamesplz == 1){
-			canMove= false;
-			rivalSelect();
-			dialogue.append("Your rival's name is "+rivalName+"."+"\n"+" ");
-			whichInput = whichInput + 1;
-			nomorenamesplz = nomorenamesplz + 1;			
-			}
-		    */
-			
+
 		}
 
 
@@ -185,18 +192,11 @@ public class guimon extends JFrame implements ActionListener{
 			    xcor = 13;
 			    allowedBlock = ' ';
 			    oldtile = ' ';
-			    if (nomorenamesplz == 0){
-				dialogue.append("Your name is "+newName+"."+"\n"+" ");
-				dialogue.append("Your rival's name is "+rivalName+"."+"\n"+" ");
-				/*whichInput = whichInput + 1;
-				  nomorenamesplz = nomorenamesplz + 1;
-				*/
-				
-			    }
+			    dialogue.append("Your name is "+newName+"."+"\n"+" ");
+			    dialogue.append("Your rival's name is "+rivalName+"."+"\n"+" ");
 			}
 		    }
-
-		   
+		    		   
 		    if (mapnum == 1){
 			if ((ycor == 8) && (xcor == 13)) {
 			    mapnum = 0;
