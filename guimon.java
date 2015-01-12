@@ -303,7 +303,7 @@ public class guimon extends JFrame implements ActionListener{
 		    canMove = false;
 		    goTalk.setVisible(true);
 		    dialogue.append("BULBASAUR - THE GRASS-TYPE POKEMON"+newline);
-		    dialogue.append("~~~~~~~~~~~~~~~~~~~~~~~"+newline);	
+		    dialogue.append(endline+newline);	
 		}
 		if (!sawCharm &&
 		    talkedToOak1 &&
