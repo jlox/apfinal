@@ -2,9 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+/* 
+   STEPS TO ADD NEW MAP:
+   1. Create map in map.java
+   2. Create function to compile map (make___)
+   3. Add map-making function to gui constructor
+   4. Add new map to getCurrentMap() function
+   5. Add door to new map
+   6. Add door to return to old map
+   7. 
+   
+ */
+
 public class guimon extends JFrame implements ActionListener{
+
+    String newline = "\n"+" ";
+    String endline = "~~~~~~~~~~~~~~~~~~";
+
     // BOOLEANS
-    boolean talk = true;
     boolean canMove = true;
 
     // GUI SETUP
@@ -14,6 +30,8 @@ public class guimon extends JFrame implements ActionListener{
     JPanel canvas;
     JTextArea dialogue = new JTextArea();
     JScrollPane scroll = new JScrollPane(dialogue, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    JButton send = new JButton();
+    JButton goTalk = new JButton("OK");
 
     // MAP SETUP
     int ycor = 5;
@@ -34,9 +52,15 @@ public class guimon extends JFrame implements ActionListener{
     String newName = "";
     String starter;
     String attackMethod;
-    boolean encounter;
+    boolean encounter = false;
     String currentString;
-    int nomorenamesplz = 0;
+    pokemon p1;
+    pokemon p2;
+    pokemon p3;
+    pokemon p4;
+    pokemon p5;
+    pokemon p6;
+	
 
     // RIVAL SETUP
     String rivalName = "";
@@ -47,6 +71,11 @@ public class guimon extends JFrame implements ActionListener{
     boolean input2 = false;
     boolean input3 = false;
     boolean input4 = false;
+    boolean talkedToOak1 = false;
+    boolean talkedToOak2 = false;
+    boolean sawCharm = false;
+    boolean sawBulb = false;
+    boolean sawSquirt = false;
 
     // YOU SHALL NOT PASS
     boolean door1 = false;
@@ -77,8 +106,10 @@ public class guimon extends JFrame implements ActionListener{
 	} else if (mapnum == 2){
 	    currentMap = g.showMap(g.sec);
 	    defaultMap = g.sec;
+	} else if (mapnum == 3){
+	    currentMap = g.showMap(g.lab);
+	    defaultMap = g.lab;
 	}
-
     }
 
     public guimon(){
@@ -86,6 +117,7 @@ public class guimon extends JFrame implements ActionListener{
 	g.makehome();
 	g.makefirst();
 	g.makesec();
+	g.makelab();
 
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
@@ -98,7 +130,7 @@ public class guimon extends JFrame implements ActionListener{
 	text.setFont(font);
 	pane.add(text);
 	text.addKeyListener(new Key());
-	dialogue.setRows(6);
+	dialogue.setRows(10);
 	dialogue.setColumns(30);
 	dialogue.setEditable(false);
 	pane.add(scroll);
@@ -106,8 +138,44 @@ public class guimon extends JFrame implements ActionListener{
 	swagger = currentMap;
 	text.setText(swagger);
 	
-	JButton send = new JButton("INPUT");
-        send.addActionListener(new ActionListener() {
+	// "CONTINUE CONVERSATION" BUTTON
+	goTalk = new JButton("OK");
+	goTalk.setVisible(false);
+	goTalk.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    if (!(talkedToOak1)){
+			talkedToOak1 = true;
+		    }
+		    if ((!(sawCharm)) &&
+			((mapnum == 3) &&
+			 ((ycor == 3) &&
+			  (xcor == 3)))){
+			sawCharm = true;
+		    }
+		    if ((!(sawBulb)) && 
+			((mapnum == 3) &&
+			 ((ycor == 2) &&
+			  (xcor == 3)))){
+			sawBulb = true;
+		    }
+		    if ((!(sawSquirt)) &&
+			((mapnum == 3) &&
+			 ((ycor == 4) &&
+			  (xcor == 3)))){
+			sawSquirt = true;
+		    }
+
+		    goTalk.setVisible(false);
+		    canMove = true;
+		}
+	    });
+
+	send = new JButton("NAME?");
+	send.setVisible(false);
+	
+	// DYNAMIC DIALOGUE INPUT BOX
+	send.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		    if (input1){
@@ -120,7 +188,9 @@ public class guimon extends JFrame implements ActionListener{
 			    canMove = true;
 			}
 			input1 = false;
+			send.setVisible(false);
 		    }
+
 		    if (input2){
 			String input = JOptionPane.showInputDialog(guimon.this, "Please enter your rival's name:");
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
@@ -131,10 +201,29 @@ public class guimon extends JFrame implements ActionListener{
 			    canMove = true;
 			}
 			input2 = false;
+			send.setVisible(false);
+		    }
+		    
+		    if (input3){
+			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
+			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
+			    starter = input.toUpperCase();
+			    // a.party[numpoke] = input.toUpperCase();
+			    // numpoke = numpoke + 1;
+			} else if (input.isEmpty()/* && whichInput == 1*/) {
+			    starter = "BULBASAUR";
+			    // a.party.add(input.toUpperCase();
+			}
+			input3 = false;
+			talkedToOak2 = true;
+			send.setVisible(false);
+			dialogue.append("You chose "+starter+"! Great decision."+newline+endline);
+			goTalk.setVisible(true);
 		    }
 		}
 	    });
 	pane.add(send);
+	pane.add(goTalk);
     }
 	    
 	    	
@@ -164,6 +253,7 @@ public class guimon extends JFrame implements ActionListener{
 		    (newName == "")) {
 		    canMove = false;
 		    nameSelect();
+		    send.setVisible(true);
 		}
 		if ((mapnum == 1) &&
 		    (ycor == 11) &&
@@ -172,11 +262,68 @@ public class guimon extends JFrame implements ActionListener{
 		    canMove = false;
 		    input2 = true;
 		    rivalSelect();
+		    send.setText("RIVAL?");
+		    send.setVisible(true);
 		}
-		if ((mapnum == 1) &&
-		    (ycor == 11) &&
-		    (xcor == 13)) {
-
+		if ((mapnum == 3) &&
+		    (!talkedToOak1) &&
+		    (((ycor == 2) &&
+		      (xcor == 8)) ||
+		     ((ycor == 3) &&
+		      (xcor == 9)) ||
+		     ((ycor == 2) &&
+		      (xcor == 10)))){
+		    canMove = false;
+		    talkToOak1();
+		    goTalk.setVisible(true);
+		}
+		if ((mapnum == 3) &&
+		    (!talkedToOak2) &&
+		    (talkedToOak1) &&
+		    (sawBulb) &&
+		    (sawCharm) &&
+		    (sawSquirt) &&
+		    (((ycor == 2) &&
+		      (xcor == 8)) ||
+		     ((ycor == 3) &&
+		      (xcor == 9)) ||
+		     ((ycor == 2) &&
+		      (xcor == 10)))){
+		    send.setText("POKEMON?");
+		    canMove = false;
+		    input3 = true;
+		    talkToOak2();
+		    send.setVisible(true);
+		}
+		if (!sawBulb &&
+		    talkedToOak1 &&
+		    (mapnum == 3) &&
+		    ((ycor == 2) &&
+		     (xcor == 3))) {
+		    canMove = false;
+		    goTalk.setVisible(true);
+		    dialogue.append("BULBASAUR - THE GRASS-TYPE POKEMON"+newline);
+		    dialogue.append(endline+newline);	
+		}
+		if (!sawCharm &&
+		    talkedToOak1 &&
+		    (mapnum == 3) &&
+		    ((ycor == 3) &&
+		     (xcor == 3))) {
+		    canMove = false;
+		    goTalk.setVisible(true);
+		    dialogue.append("CHARMANDER - THE FIRE-TYPE POKEMON"+newline);
+		    dialogue.append(endline+newline);	
+		}
+		if (!sawSquirt &&
+		    talkedToOak1 &&
+		    (mapnum == 3) &&
+		    ((ycor == 4) &&
+		     (xcor == 3))) {
+		    canMove = false;
+		    goTalk.setVisible(true);
+		    dialogue.append("SQUIRTLE - THE WATER-TYPE POKEMON"+newline);
+		    dialogue.append(endline+newline);	
 		}
 
 
@@ -192,8 +339,6 @@ public class guimon extends JFrame implements ActionListener{
 			    xcor = 13;
 			    allowedBlock = ' ';
 			    oldtile = ' ';
-			    dialogue.append("Your name is "+newName+"."+"\n"+" ");
-			    dialogue.append("Your rival's name is "+rivalName+"."+"\n"+" ");
 			}
 		    }
 		    		   
@@ -231,6 +376,29 @@ public class guimon extends JFrame implements ActionListener{
 			    allowedBlock = ' ';
 			    oldtile = ' ';
 			}
+			if ((ycor == 6) && (xcor == 6)) {
+			    mapnum = 3;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 8;
+			    xcor = 9;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+		    }
+		    
+		    if (mapnum == 3){
+			if ((ycor == 9) & (xcor == 9)) {
+			    mapnum = 2;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 7;
+			    xcor = 6;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
 		    }
 		}
 		
@@ -238,16 +406,14 @@ public class guimon extends JFrame implements ActionListener{
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
-		if (xcor == 5 && newName != ""){
-		    dialogue.append(newName+"\n"+" ");
-		}
 	    }
+	    
 	}
     
     // STORYLINE + DIALOGUE FUNCTIONS
 
 	public void nameSelect() {
-	    String newline = "\n" + " ";
+	    
 	    String g1 = " Welcome to the world of Pokemon!";
 	    String g2 = "Before we begin our adventure, what is your name?";
 	    String g3 = "If left blank, you will be defaulted to ASH.";
@@ -258,10 +424,11 @@ public class guimon extends JFrame implements ActionListener{
 	    dialogue.append("Please open the INPUT box and type your name." + newline);
 	    dialogue.append("When you are done, click the red GAME SCREEN" +newline+"to resume." + newline);
 	    dialogue.append(g3+newline);
+	    dialogue.append(endline+newline);	    
 	}
 
 	public void rivalSelect() {
-	    String newline = "\n"+" ";
+	    
 	    String g1 = "Oh wait! What's your RIVAL's name?";
 	    String g2 = "Please open the INPUT box and type his name.";
 	    String g3 = "Afterwards, click the red GAME SCREEN to resume.";
@@ -271,9 +438,30 @@ public class guimon extends JFrame implements ActionListener{
 	    dialogue.append(g2+newline);
 	    dialogue.append(g3+newline);
 	    dialogue.append(g4+newline);
+	    dialogue.append(endline+newline);	    
 	    
 	}
-		
+	
+	public void talkToOak1() {
+	    
+	    dialogue.append("Hello! I am Professor Oak!"+newline);
+	    dialogue.append("You must be "+newName+"!"+newline);
+	    dialogue.append("Please walk over to the POKEMON on the left"+newline);
+	    dialogue.append("and come back to me after you've seen them all."+newline);
+	    dialogue.append(endline+newline);	    
+	    
+	}
+
+	public void talkToOak2() {
+	    
+	    dialogue.append("I'm happy you made your decision!"+newline);
+	    dialogue.append("What POKEMON do you want to start with?"+newline);
+	    dialogue.append("Please type in the name of the pokemon."+newline);
+	    dialogue.append("If left blank, you will be given BULBASAUR."+newline);
+	    dialogue.append("~~~~~~~~~~~~~~~~~~~~~~~"+newline);	    
+	    
+	}
+
 
 	
   
@@ -302,6 +490,17 @@ public class guimon extends JFrame implements ActionListener{
 	public void keyTyped(KeyEvent e){}
     }
 
+    /*
+   public void yourTurn(){
+	if (encounter) {
+	    if (getHealth() <= 0){
+		encounter = false;
+	    } else {
+		
+	    }
+	}
+    }
+    */
 
     // DRIVER
     public static void main(String[] args){

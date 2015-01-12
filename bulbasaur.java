@@ -24,7 +24,7 @@ public class bulbasaur extends pokemon {
 
     public void leafstorm(pokemon other){
 	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + "USES LEAF STORM ON " +other);
+	System.out.println(this.getName() + " USES LEAF STORM ON " +other);
 	other.setDefending(true);
     }
 
