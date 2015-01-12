@@ -52,8 +52,15 @@ public class guimon extends JFrame implements ActionListener{
     String newName = "";
     String starter;
     String attackMethod;
-    boolean encounter;
+    boolean encounter = false;
     String currentString;
+    pokemon p1;
+    pokemon p2;
+    pokemon p3;
+    pokemon p4;
+    pokemon p5;
+    pokemon p6;
+	
 
     // RIVAL SETUP
     String rivalName = "";
@@ -130,7 +137,8 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	swagger = currentMap;
 	text.setText(swagger);
-
+	
+	// "CONTINUE CONVERSATION" BUTTON
 	goTalk = new JButton("OK");
 	goTalk.setVisible(false);
 	goTalk.addActionListener(new ActionListener() {
@@ -165,7 +173,8 @@ public class guimon extends JFrame implements ActionListener{
 
 	send = new JButton("NAME?");
 	send.setVisible(false);
-
+	
+	// DYNAMIC DIALOGUE INPUT BOX
 	send.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -199,8 +208,11 @@ public class guimon extends JFrame implements ActionListener{
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
 			    starter = input.toUpperCase();
+			    // a.party[numpoke] = input.toUpperCase();
+			    // numpoke = numpoke + 1;
 			} else if (input.isEmpty()/* && whichInput == 1*/) {
 			    starter = "BULBASAUR";
+			    // a.party.add(input.toUpperCase();
 			}
 			input3 = false;
 			talkedToOak2 = true;
@@ -284,6 +296,7 @@ public class guimon extends JFrame implements ActionListener{
 		    send.setVisible(true);
 		}
 		if (!sawBulb &&
+		    talkedToOak1 &&
 		    (mapnum == 3) &&
 		    ((ycor == 2) &&
 		     (xcor == 3))) {
@@ -292,7 +305,8 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append("BULBASAUR - THE GRASS-TYPE POKEMON"+newline);
 		    dialogue.append("~~~~~~~~~~~~~~~~~~~~~~~"+newline);	
 		}
-		if (!sawCharm && 
+		if (!sawCharm &&
+		    talkedToOak1 &&
 		    (mapnum == 3) &&
 		    ((ycor == 3) &&
 		     (xcor == 3))) {
@@ -302,6 +316,7 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append(endline+newline);	
 		}
 		if (!sawSquirt &&
+		    talkedToOak1 &&
 		    (mapnum == 3) &&
 		    ((ycor == 4) &&
 		     (xcor == 3))) {
@@ -475,6 +490,17 @@ public class guimon extends JFrame implements ActionListener{
 	public void keyTyped(KeyEvent e){}
     }
 
+    /*
+   public void yourTurn(){
+	if (encounter) {
+	    if (getHealth() <= 0){
+		encounter = false;
+	    } else {
+		
+	    }
+	}
+    }
+    */
 
     // DRIVER
     public static void main(String[] args){
