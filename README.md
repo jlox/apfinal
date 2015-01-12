@@ -60,3 +60,9 @@ Division of work:
 - Edited pokemon files, added more attacks
 - Worked on map, added lab interior
 - Worked on guimon.java, added dynamic input dialogue box
+
+1/10/2015
+======
+- Dialogue box changes, added "OK" button to continue dialogue
+- Input box now can change based on situation (ex. name of char, name of rival, pokemon you want to choose, etc.)
+
