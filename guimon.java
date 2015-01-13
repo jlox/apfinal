@@ -54,14 +54,25 @@ public class guimon extends JFrame implements ActionListener{
     String attackMethod;
     boolean encounter = false;
     String currentString;
-    pokemon p1;
-    pokemon p2;
-    pokemon p3;
-    pokemon p4;
-    pokemon p5;
-    pokemon p6;
-	
+    String currentPoke;
+    String[] party = new String[6];
+    int catchnum = 0; // always 6 or less
+    int pokenum = 0; // changes based on which pokemon you want to use
 
+    // POKEMON INITIALIZATION
+
+    bulbasaur bulb1 = new bulbasaur();
+    bulbasaur bulb2 = new bulbasaur();
+    bulbasaur bulb3 = new bulbasaur();
+
+    charmander char1 = new charmander();
+    charmander char2 = new charmander();
+    charmander char3 = new charmander();
+
+    squirtle squi1 = new squirtle();
+    squirtle squi2 = new squirtle();
+    squirtle squi3 = new squirtle();
+    
     // RIVAL SETUP
     String rivalName = "";
     String rivalStarter;
@@ -207,12 +218,11 @@ public class guimon extends JFrame implements ActionListener{
 		    if (input3){
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
-			    starter = input.toUpperCase();
-			    // a.party[numpoke] = input.toUpperCase();
-			    // numpoke = numpoke + 1;
+			    party[catchnum] = input.toUpperCase();
+			    catchnum = catchnum + 1;
 			} else if (input.isEmpty()/* && whichInput == 1*/) {
-			    starter = "BULBASAUR";
-			    // a.party.add(input.toUpperCase();
+			    party[catchnum] = "BULBASAUR";
+			    catchnum = catchnum + 1;
 			}
 			input3 = false;
 			talkedToOak2 = true;
@@ -491,6 +501,12 @@ public class guimon extends JFrame implements ActionListener{
     }
 
     /*
+    public void getCurrentPoke(){
+	currentPoke = party[pokenum];
+    }
+    */
+    
+    /*
    public void yourTurn(){
 	if (encounter) {
 	    if (getHealth() <= 0){
@@ -499,6 +515,14 @@ public class guimon extends JFrame implements ActionListener{
 		
 	    }
 	}
+    }
+    */
+
+    /*
+    public void enemyTurn(){
+	if (encounter) {
+	    if
+	    
     }
     */
 
