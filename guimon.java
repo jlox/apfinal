@@ -500,19 +500,24 @@ public class guimon extends JFrame implements ActionListener{
 	public void keyTyped(KeyEvent e){}
     }
 
+    // BATTLE FUNCTIONS
+
+    // Remember to implement species and make party a pokemon[] array.
+    
+    
     /*
     public void getCurrentPoke(){
 	currentPoke = party[pokenum];
     }
     */
     
-    /*
+   /*
    public void yourTurn(){
 	if (encounter) {
-	    if (getHealth() <= 0){
+	    if (currentPoke.getHealth() <= 0){
 		encounter = false;
 	    } else {
-		
+		if (currentPoke.species == "BULBASAUR")
 	    }
 	}
     }
