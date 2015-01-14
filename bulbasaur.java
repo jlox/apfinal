@@ -2,12 +2,21 @@ import java.util.Random;
 public class bulbasaur extends pokemon {
     Random randomNumber = new Random();
     String type = "GRASS";
-    public charmander (String n){
+    String species = "BULBASAUR";
+
+    public charmander(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
     }
+    
+    public charmander(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
+    }
+    
 
     //basics
     public void cut(pokemon other){
