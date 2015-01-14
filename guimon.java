@@ -55,12 +55,15 @@ public class guimon extends JFrame implements ActionListener{
     boolean encounter = false;
     String currentString;
     String currentPoke;
-    String[] party = new String[6];
+    
+    // String[] party = new String[6];
+    pokemon[] party = new pokemon[6];
     int catchnum = 0; // always 6 or less
     int pokenum = 0; // changes based on which pokemon you want to use
 
     // POKEMON INITIALIZATION
 
+    /*   
     bulbasaur bulb1 = new bulbasaur();
     bulbasaur bulb2 = new bulbasaur();
     bulbasaur bulb3 = new bulbasaur();
@@ -72,6 +75,14 @@ public class guimon extends JFrame implements ActionListener{
     squirtle squi1 = new squirtle();
     squirtle squi2 = new squirtle();
     squirtle squi3 = new squirtle();
+
+    > 
+    string species = "SQUIRTLE";
+
+    if (party[numpoke].species == "SQUIRTLE"){ 
+    
+}
+    */
     
     // RIVAL SETUP
     String rivalName = "";
@@ -220,8 +231,8 @@ public class guimon extends JFrame implements ActionListener{
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
 			    party[catchnum] = input.toUpperCase();
 			    catchnum = catchnum + 1;
-			} else if (input.isEmpty()/* && whichInput == 1*/) {
-			    party[catchnum] = "BULBASAUR";
+			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
+			    party[catchnum] = bulb1;
 			    catchnum = catchnum + 1;
 			}
 			input3 = false;
