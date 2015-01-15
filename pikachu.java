@@ -11,6 +11,11 @@ public class pikachu extends pokemon{
 	setName(n);
     }
 
+    public pikachu(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
+    }
     //basics
     public void headbutt(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));

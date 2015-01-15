@@ -4,14 +4,14 @@ public class bulbasaur extends pokemon {
     String type = "GRASS";
     String species = "BULBASAUR";
 
-    public charmander(String n){
+    public bulbasaur(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
     }
     
-    public charmander(){
+    public bulbasaur(){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);

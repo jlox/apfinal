@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 
 /* 
@@ -17,6 +18,7 @@ import java.awt.event.*;
 
 public class guimon extends JFrame implements ActionListener{
 
+    Random randomNumber = new Random();
     String newline = "\n"+" ";
     String endline = "~~~~~~~~~~~~~~~~~~";
 
@@ -56,7 +58,7 @@ public class guimon extends JFrame implements ActionListener{
     String attackMethod;
     boolean encounter = false;
     String currentString;
-    String currentPoke;
+    pokemon currentPoke;
     
     // String[] party = new String[6];
     pokemon[] party = new pokemon[6];
@@ -77,13 +79,6 @@ public class guimon extends JFrame implements ActionListener{
     squirtle squi1 = new squirtle();
     squirtle squi2 = new squirtle();
     squirtle squi3 = new squirtle();
-
-    > 
-    string species = "SQUIRTLE";
-
-    if (party[numpoke].species == "SQUIRTLE"){ 
-    
-}
     */
     
     // RIVAL SETUP
@@ -109,6 +104,19 @@ public class guimon extends JFrame implements ActionListener{
     boolean move2 = false;
     boolean move3 = false;
     boolean move4 = false;
+
+
+    // WILD POKEMON SETUP
+    bulbasaur wildbulb1 = new bulbasaur();
+    charmander wildchar1 = new charmander();
+    pikachu wildpik1 = new pikachu();
+    squirtle wildsqui1 = new squirtle();
+    ArrayList<pokemon> wildpoke = new ArrayList();
+    wildpoke.add(wildbulb1);
+    wildpoke.add(wildchar1);
+    wildpoke.add(wildpik1);
+    wildpoke.add(wildsqui1);
+    pokemon currentEnemy;
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -524,50 +532,55 @@ public class guimon extends JFrame implements ActionListener{
     // Remember to implement species and make party a pokemon[] array.
     
     
-    /*
     public void getCurrentPoke(){
 	currentPoke = party[pokenum];
     }
-    */
-    
+
+    public void getCurrentEnemy(){
+	currentEnemy = wildpoke[randomNumber.nextInt(wildpoke.size())];
+    }
    
     public void yourTurn(){ // edit the "enemy" and boolean things
 	if (encounter) {
-	    if (a.getHealth() <= 0){
-		if (currentPoke.getHealth() <= 0){
-		    encounter = false;
-		} else if (currentPoke.species == "BULBASAUR"){
-		    if (move1){
-			currentPoke.cut(enemy);
-		    } else if (move2){
-			currentPoke.vinewhip(enemy);
-		    } else if (move3){
-			currentPoke.vinewhip(enemy);
-		    }
-		} else if (currentPoke.species == "CHARMANDER"){
-		    if (move1){
-			currentPoke.cut(enemy);
-		    } else if (move2){
-			currentPoke.megakick(enemy);
-		    } else if (move3){
-			currentPoke.focuspunch(enemy);
-		    }
-		} else if (currentPoke.species == "PIKACHU"){
-		    if (move1){
-			currentPoke.headbutt(enemy);
-		    } else if (move2){
-			currentPoke.voltswitch(enemy);
-		    } else if (move3){
-			currentPoke.thunder(enemy);
-		    }
-		} else if (currentPoke.species == "SQUIRTLE"){
-		    if (move1){
-			currentPoke.watergun(enemy);
-		    } else if (move2){
-			currentPoke.surf(enemy);
-		    } else if (move3){
-			currentPoke.waterspout(enemy);
-		    }
+	    if (currentPoke.getHealth() <= 0){
+		encounter = false;
+	    } else if (currentPoke.species == "BULBASAUR"){
+		if (move1){
+		    currentPoke.cut(enemy);
+		    dialogue.append("BULBASAUR used CUT on " + enemy.species + newline);
+		} else if (move2){
+		    currentPoke.vinewhip(enemy);
+		    dialogue.append("BULBASAUR used VINE WHIP on " + enemy.species + newline);
+		} else if (move3){
+		    currentPoke.leafstorm(enemy);
+		    dialogue.append("BULBASAUR used LEAF STORM on " + enemy.species + newline);
+		}
+	    } else if (currentPoke.species == "CHARMANDER"){
+		if (move1){
+		    currentPoke.scratch(enemy);
+		    dialogue.append("CHARMANDER used SCRATCH on " + enemy.species + newline); 
+		} else if (move2){
+		    currentPoke.megakick(enemy);
+		    dialogue.append("CHARMANDER used MEGAKICK on " + enemy.species + newline);
+		} else if (move3){
+		    currentPoke.focuspunch(enemy);
+		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + enemy.species + newline);
+		}
+	    } else if (currentPoke.species == "PIKACHU"){
+		if (move1){
+		    currentPoke.headbutt(enemy);
+		} else if (move2){
+		    currentPoke.voltswitch(enemy);
+		} else if (move3){
+		    currentPoke.thunder(enemy);
+		}
+	    } else if (currentPoke.species == "SQUIRTLE"){
+		if (move1){
+		    currentPoke.watergun(enemy);
+		} else if (move2){
+		    currentPoke.surf(enemy);
+		} else if (move3){
+		    currentPoke.waterspout(enemy);
 		}
 	    }
 	}

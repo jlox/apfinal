@@ -11,6 +11,12 @@ public class charmander extends pokemon {
 	setName(n);
     }
 
+    public charmander(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
+    }
+
     //basics
     public void scratch(pokemon other) {	
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20)); 

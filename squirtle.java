@@ -4,11 +4,17 @@ public class squirtle extends pokemon {
     String type = "WATER";
     String species = "SQUIRTLE";
 
-    public squirtle (String n){
+    public squirtle(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
+    }
+
+    public squirtle(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
     }
 
     //basics
