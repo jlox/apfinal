@@ -524,21 +524,72 @@ public class guimon extends JFrame implements ActionListener{
     }
     */
     
-   /*
-   public void yourTurn(){
+   
+    public void yourTurn(){ // edit the "enemy" and boolean things
 	if (encounter) {
-<<<<<<< HEAD
 	    if (a.getHealth() <= 0){
-=======
-	    if (currentPoke.getHealth() <= 0){
->>>>>>> 1491b33dae6435a5c833983a1ccd727f57f512a1
-		encounter = false;
-	    } else {
-		if (currentPoke.species == "BULBASAUR")
+		if (currentPoke.getHealth() <= 0){
+		    encounter = false;
+		} else {
+		    if (currentPoke.species == "BULBASAUR"){
+			if (cut){
+			    currentPoke.cut(enemy);
+			} else {
+			    if (vinewhip){
+				currentPoke.vinewhip(enemy);
+			    }
+			} else {
+			    if (leafstorm){
+				currentPoke.vinewhip(enemy);
+			    }
+			}
+		    }
+		} else {
+		    if (currentPoke.species == "CHARMANDER"){
+			if (scratch){
+			    currentPoke.cut(enemy);
+			} else {
+			    if (megakick){
+				currentPoke.megakick(enemy);
+			    }
+			} else {
+			    if (focuspunch){
+				currentPoke.focuspunch(enemy);
+			    }
+			}
+		    }
+		} else {
+		    if (currentPoke.species == "PIKACHU"){
+			if (headbutt){
+			    currentPoke.headbutt(enemy);
+			} else {
+			    if (voltswitch){
+				currentPoke.voltswitch(enemy);
+			    }
+			} else {
+			    if (thunder){
+				currentPoke.thunder(enemy);
+			    }
+			}
+		    }
+		} else {
+		    if (currentPoke.species == "SQUIRTLE"){
+			if (watergun){
+			    currentPoke.watergun(enemy);
+			} else {
+			    if (surf){
+				currentPoke.surf(enemy);
+			    }
+			} else {
+			    if (waterspout){
+				currentPoke.waterspout(enemy);
+			    }
+			}
+		    }
+		}
 	    }
 	}
-    }
-    */
+    
 
     /*
     public void enemyTurn(){

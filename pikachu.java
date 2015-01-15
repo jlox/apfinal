@@ -2,6 +2,8 @@ import java.util.Random;
 public class pikachu extends pokemon{
     Random randomNumber = new Random();
     String type = "ELECTRIC";
+    String species = "PIKACHU";
+
     public pikachu(String n){
 	setStrength(50);
 	setHealth(100);
