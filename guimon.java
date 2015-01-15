@@ -579,16 +579,21 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append("PIKACHU used HEADBUTT on " + enemy.species + newline);
 		} else if (move2){
 		    currentPoke.voltswitch(enemy);
+		    dialogue.append("PIKACHU used VOLT SWITCH on " + enemy.species + newline);
 		} else if (move3){
 		    currentPoke.thunder(enemy);
+		    dialogue.append("PIKACHU used THUNDER on " + enemy.species + newline);
 		}
 	    } else if (currentPoke.species == "SQUIRTLE"){
 		if (move1){
 		    currentPoke.watergun(enemy);
+		    dialogue.append("SQUIRTLE used WATER GUN on " + enemy.species + newline);
 		} else if (move2){
 		    currentPoke.surf(enemy);
+		    dialogue.append("SQUIRTLE used SURF on " + enemy.species + newline);
 		} else if (move3){
 		    currentPoke.waterspout(enemy);
+		    dialogue.append("SQUIRTLE used WATER SPOUT on " + enemy.species + newline);
 		}
 	    }
 	}
