@@ -34,6 +34,9 @@ public class guimon extends JFrame implements ActionListener{
     JScrollPane scroll = new JScrollPane(dialogue, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     JButton send = new JButton();
     JButton goTalk = new JButton("OK");
+    JButton ability1 = new JButton();
+    JButton ability2 = new JButton();
+    JButton ability3 = new JButton();
 
     // MAP SETUP
     int ycor = 5;
@@ -109,6 +112,10 @@ public class guimon extends JFrame implements ActionListener{
     boolean move2 = false;
     boolean move3 = false;
     boolean move4 = false;
+
+    // WILD POKEMON SETUP
+    bulbasaur wildbulb1 = new bulbasaur();
+    
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -167,6 +174,10 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	swagger = currentMap;
 	text.setText(swagger);
+
+	ability1.setVisible(false);
+	ability2.setVisible(false);
+	ability3.setVisible(false);
 	
 	// "CONTINUE CONVERSATION" BUTTON
 	goTalk = new JButton("OK");
@@ -248,6 +259,7 @@ public class guimon extends JFrame implements ActionListener{
 			send.setVisible(false);
 			dialogue.append("You chose "+starter+"! Great decision."+newline+endline);
 			goTalk.setVisible(true);
+			door1 = true;
 		    }
 		}
 	    });
@@ -533,41 +545,40 @@ public class guimon extends JFrame implements ActionListener{
    
     public void yourTurn(){ // edit the "enemy" and boolean things
 	if (encounter) {
-	    if (a.getHealth() <= 0){
-		if (currentPoke.getHealth() <= 0){
-		    encounter = false;
-		} else if (currentPoke.species == "BULBASAUR"){
-		    if (move1){
-			currentPoke.cut(enemy);
-		    } else if (move2){
-			currentPoke.vinewhip(enemy);
-		    } else if (move3){
-			currentPoke.vinewhip(enemy);
-		    }
-		} else if (currentPoke.species == "CHARMANDER"){
-		    if (move1){
-			currentPoke.cut(enemy);
-		    } else if (move2){
-			currentPoke.megakick(enemy);
-		    } else if (move3){
-			currentPoke.focuspunch(enemy);
-		    }
-		} else if (currentPoke.species == "PIKACHU"){
-		    if (move1){
-			currentPoke.headbutt(enemy);
-		    } else if (move2){
-			currentPoke.voltswitch(enemy);
-		    } else if (move3){
-			currentPoke.thunder(enemy);
-		    }
-		} else if (currentPoke.species == "SQUIRTLE"){
-		    if (move1){
-			currentPoke.watergun(enemy);
-		    } else if (move2){
-			currentPoke.surf(enemy);
-		    } else if (move3){
-			currentPoke.waterspout(enemy);
-		    }
+	    if (currentPoke.getHealth() <= 0){
+		encounter = false;
+	    } else if (currentPoke.species == "BULBASAUR"){
+		if (move1){
+		    currentPoke.cut(enemy);
+		    dialogue.append("BULBASAUR used CUT");
+		} else if (move2){
+		    currentPoke.vinewhip(enemy);
+		} else if (move3){
+		    currentPoke.vinewhip(enemy);
+		}
+	    } else if (currentPoke.species == "CHARMANDER"){
+		if (move1){
+		    currentPoke.cut(enemy);
+		} else if (move2){
+		    currentPoke.megakick(enemy);
+		} else if (move3){
+		    currentPoke.focuspunch(enemy);
+		}
+	    } else if (currentPoke.species == "PIKACHU"){
+		if (move1){
+		    currentPoke.headbutt(enemy);
+		} else if (move2){
+		    currentPoke.voltswitch(enemy);
+		} else if (move3){
+		    currentPoke.thunder(enemy);
+		}
+	    } else if (currentPoke.species == "SQUIRTLE"){
+		if (move1){
+		    currentPoke.watergun(enemy);
+		} else if (move2){
+		    currentPoke.surf(enemy);
+		} else if (move3){
+		    currentPoke.waterspout(enemy);
 		}
 	    }
 	}
