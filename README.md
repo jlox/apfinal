@@ -2,19 +2,25 @@ apfinal
 =======
 
   ___________________________________________
+~/*** AP CS Term 1 Final Project Description ***\~
+ _____________________________________________
+
+ At first, Jeanne and I decided to create an ASCII-based pokemon
+ clone within the terminal, but later decided to
+
+
+  ___________________________________________
 ~/*** AP CS Term 1 Final Project Checklist ***\~
  _____________________________________________
 
 Required:
 - 2d array
-- not gui
 - pokemon
 - variables for direction
 - create maps
 - create trainers
 - create like 10~ pokemon
-- arraylists for pokemon party
-- find out how to do dynamic screen in java terminal
+- array for pokemon party
 
 
 Stuff to add to basechar:
@@ -65,4 +71,10 @@ Division of work:
 ======
 - Dialogue box changes, added "OK" button to continue dialogue
 - Input box now can change based on situation (ex. name of char, name of rival, pokemon you want to choose, etc.)
+
+1/11/2015
+=======
+- Started working on battle sequences
+- Making battle sequence into two parts, yourTurn and enemyTurn
+
 

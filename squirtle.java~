@@ -1,43 +1,27 @@
 import java.util.Random;
-public class bulbasaur extends pokemon {
+public class squirtle extends pokemon {
     Random randomNumber = new Random();
-    String type = "GRASS";
-    String species = "BULBASAUR";
-
-    public charmander(String n){
+    String type = "WATER";
+    public squirtle (String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
     }
-    
-    public charmander(){
-	setStrength(50);
-	setHealth(100);
-	setSpeed(40);
-    }
-    
 
     //basics
-    public void cut(pokemon other){
+    public void watergun(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " CUTS "+other);
+	System.out.println(this.getName() + " WATERGUNS  "+other);
 	other.setDefending(true);
     }
 
-    public void vinewhip(pokemon other){
-	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	System.out.prinlnt(this.getName() + " VINEWHIPS " +other);
+    public void SURF(pokemon other){
+	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
+	System.out.prinlnt(this.getName() + " SURF  " +other);
 	other.setDefending(true);
     }
 
-    public void leafstorm(pokemon other){
-	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " USES LEAF STORM ON " +other);
-	other.setDefending(true);
-    }
-
-    //not actual use; used when attacked, see if misses
     public void dodge(pokemon other){
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
 	if (other.getAttackStrength() < 15){
@@ -46,7 +30,6 @@ public class bulbasaur extends pokemon {
 	other.assignDamage(this);
     }
 
-    /*
     public void run (pokemon other){
 	boolean escape = randomNumber.nextInt(150) < this.getStrength();
 	if (escape) {
@@ -56,5 +39,5 @@ public class bulbasaur extends pokemon {
 	}
 	other.setAttackStrength(0);
     }
-    */
+
 }

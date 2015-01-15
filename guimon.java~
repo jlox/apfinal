@@ -20,8 +20,6 @@ public class guimon extends JFrame implements ActionListener{
     String newline = "\n"+" ";
     String endline = "~~~~~~~~~~~~~~~~~~";
 
-    ash a = new ash();
-
     // BOOLEANS
     boolean canMove = true;
 
@@ -56,36 +54,14 @@ public class guimon extends JFrame implements ActionListener{
     String attackMethod;
     boolean encounter = false;
     String currentString;
-    String currentPoke;
-    
-    // String[] party = new String[6];
-    pokemon[] party = new pokemon[6];
-    int catchnum = 0; // always 6 or less
-    int pokenum = 0; // changes based on which pokemon you want to use
+    pokemon p1;
+    pokemon p2;
+    pokemon p3;
+    pokemon p4;
+    pokemon p5;
+    pokemon p6;
+	
 
-    // POKEMON INITIALIZATION
-
-    /*   
-    bulbasaur bulb1 = new bulbasaur();
-    bulbasaur bulb2 = new bulbasaur();
-    bulbasaur bulb3 = new bulbasaur();
-
-    charmander char1 = new charmander();
-    charmander char2 = new charmander();
-    charmander char3 = new charmander();
-
-    squirtle squi1 = new squirtle();
-    squirtle squi2 = new squirtle();
-    squirtle squi3 = new squirtle();
-
-    > 
-    string species = "SQUIRTLE";
-
-    if (party[numpoke].species == "SQUIRTLE"){ 
-    
-}
-    */
-    
     // RIVAL SETUP
     String rivalName = "";
     String rivalStarter;
@@ -231,11 +207,12 @@ public class guimon extends JFrame implements ActionListener{
 		    if (input3){
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
-			    party[catchnum] = input.toUpperCase();
-			    catchnum = catchnum + 1;
-			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
-			    party[catchnum] = bulb1;
-			    catchnum = catchnum + 1;
+			    starter = input.toUpperCase();
+			    // a.party[numpoke] = input.toUpperCase();
+			    // numpoke = numpoke + 1;
+			} else if (input.isEmpty()/* && whichInput == 1*/) {
+			    starter = "BULBASAUR";
+			    // a.party.add(input.toUpperCase();
 			}
 			input3 = false;
 			talkedToOak2 = true;
@@ -513,38 +490,15 @@ public class guimon extends JFrame implements ActionListener{
 	public void keyTyped(KeyEvent e){}
     }
 
-    // BATTLE FUNCTIONS
-
-    // Remember to implement species and make party a pokemon[] array.
-    
-    
     /*
-    public void getCurrentPoke(){
-	currentPoke = party[pokenum];
-    }
-    */
-    
-   /*
    public void yourTurn(){
 	if (encounter) {
-<<<<<<< HEAD
-	    if (a.getHealth() <= 0){
-=======
-	    if (currentPoke.getHealth() <= 0){
->>>>>>> 1491b33dae6435a5c833983a1ccd727f57f512a1
+	    if (getHealth() <= 0){
 		encounter = false;
 	    } else {
-		if (currentPoke.species == "BULBASAUR")
+		
 	    }
 	}
-    }
-    */
-
-    /*
-    public void enemyTurn(){
-	if (encounter) {
-	    if
-	    
     }
     */
 
