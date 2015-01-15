@@ -20,6 +20,8 @@ public class guimon extends JFrame implements ActionListener{
     String newline = "\n"+" ";
     String endline = "~~~~~~~~~~~~~~~~~~";
 
+    ash a = new ash();
+
     // BOOLEANS
     boolean canMove = true;
 
@@ -493,7 +495,7 @@ public class guimon extends JFrame implements ActionListener{
     /*
    public void yourTurn(){
 	if (encounter) {
-	    if (getHealth() <= 0){
+	    if (a.getHealth() <= 0){
 		encounter = false;
 	    } else {
 		
