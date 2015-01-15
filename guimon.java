@@ -36,6 +36,9 @@ public class guimon extends JFrame implements ActionListener{
     JScrollPane scroll = new JScrollPane(dialogue, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     JButton send = new JButton();
     JButton goTalk = new JButton("OK");
+    JButton ability1 = new JButton();
+    JButton ability2 = new JButton();
+    JButton ability3 = new JButton();
 
     // MAP SETUP
     int ycor = 5;
@@ -105,6 +108,7 @@ public class guimon extends JFrame implements ActionListener{
     boolean move3 = false;
     boolean move4 = false;
 
+<<<<<<< HEAD
 
     // WILD POKEMON SETUP
     bulbasaur wildbulb1 = new bulbasaur();
@@ -117,6 +121,11 @@ public class guimon extends JFrame implements ActionListener{
     wildpoke.add(wildpik1);
     wildpoke.add(wildsqui1);
     pokemon currentEnemy;
+=======
+    // WILD POKEMON SETUP
+    bulbasaur wildbulb1 = new bulbasaur();
+    
+>>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -175,6 +184,10 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	swagger = currentMap;
 	text.setText(swagger);
+
+	ability1.setVisible(false);
+	ability2.setVisible(false);
+	ability3.setVisible(false);
 	
 	// "CONTINUE CONVERSATION" BUTTON
 	goTalk = new JButton("OK");
@@ -256,6 +269,7 @@ public class guimon extends JFrame implements ActionListener{
 			send.setVisible(false);
 			dialogue.append("You chose "+starter+"! Great decision."+newline+endline);
 			goTalk.setVisible(true);
+			door1 = true;
 		    }
 		}
 	    });
@@ -547,6 +561,7 @@ public class guimon extends JFrame implements ActionListener{
 	    } else if (currentPoke.species == "BULBASAUR"){
 		if (move1){
 		    currentPoke.cut(enemy);
+<<<<<<< HEAD
 		    dialogue.append("BULBASAUR used CUT on " + enemy.species + newline);
 		} else if (move2){
 		    currentPoke.vinewhip(enemy);
@@ -565,6 +580,21 @@ public class guimon extends JFrame implements ActionListener{
 		} else if (move3){
 		    currentPoke.focuspunch(enemy);
 		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + enemy.species + newline);
+=======
+		    dialogue.append("BULBASAUR used CUT");
+		} else if (move2){
+		    currentPoke.vinewhip(enemy);
+		} else if (move3){
+		    currentPoke.vinewhip(enemy);
+		}
+	    } else if (currentPoke.species == "CHARMANDER"){
+		if (move1){
+		    currentPoke.cut(enemy);
+		} else if (move2){
+		    currentPoke.megakick(enemy);
+		} else if (move3){
+		    currentPoke.focuspunch(enemy);
+>>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
 		}
 	    } else if (currentPoke.species == "PIKACHU"){
 		if (move1){
