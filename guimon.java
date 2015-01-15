@@ -103,6 +103,12 @@ public class guimon extends JFrame implements ActionListener{
 
     // YOU SHALL NOT PASS
     boolean door1 = false;
+
+    // BATTLE SETUP
+    boolean move1 = false;
+    boolean move2 = false;
+    boolean move3 = false;
+    boolean move4 = false;
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -530,66 +536,42 @@ public class guimon extends JFrame implements ActionListener{
 	    if (a.getHealth() <= 0){
 		if (currentPoke.getHealth() <= 0){
 		    encounter = false;
-		} else {
-		    if (currentPoke.species == "BULBASAUR"){
-			if (cut){
-			    currentPoke.cut(enemy);
-			} else {
-			    if (vinewhip){
-				currentPoke.vinewhip(enemy);
-			    }
-			} else {
-			    if (leafstorm){
-				currentPoke.vinewhip(enemy);
-			    }
-			}
+		} else if (currentPoke.species == "BULBASAUR"){
+		    if (move1){
+			currentPoke.cut(enemy);
+		    } else if (move2){
+			currentPoke.vinewhip(enemy);
+		    } else if (move3){
+			currentPoke.vinewhip(enemy);
 		    }
-		} else {
-		    if (currentPoke.species == "CHARMANDER"){
-			if (scratch){
-			    currentPoke.cut(enemy);
-			} else {
-			    if (megakick){
-				currentPoke.megakick(enemy);
-			    }
-			} else {
-			    if (focuspunch){
-				currentPoke.focuspunch(enemy);
-			    }
-			}
+		} else if (currentPoke.species == "CHARMANDER"){
+		    if (move1){
+			currentPoke.cut(enemy);
+		    } else if (move2){
+			currentPoke.megakick(enemy);
+		    } else if (move3){
+			currentPoke.focuspunch(enemy);
 		    }
-		} else {
-		    if (currentPoke.species == "PIKACHU"){
-			if (headbutt){
-			    currentPoke.headbutt(enemy);
-			} else {
-			    if (voltswitch){
-				currentPoke.voltswitch(enemy);
-			    }
-			} else {
-			    if (thunder){
-				currentPoke.thunder(enemy);
-			    }
-			}
+		} else if (currentPoke.species == "PIKACHU"){
+		    if (move1){
+			currentPoke.headbutt(enemy);
+		    } else if (move2){
+			currentPoke.voltswitch(enemy);
+		    } else if (move3){
+			currentPoke.thunder(enemy);
 		    }
-		} else {
-		    if (currentPoke.species == "SQUIRTLE"){
-			if (watergun){
-			    currentPoke.watergun(enemy);
-			} else {
-			    if (surf){
-				currentPoke.surf(enemy);
-			    }
-			} else {
-			    if (waterspout){
-				currentPoke.waterspout(enemy);
-			    }
-			}
+		} else if (currentPoke.species == "SQUIRTLE"){
+		    if (move1){
+			currentPoke.watergun(enemy);
+		    } else if (move2){
+			currentPoke.surf(enemy);
+		    } else if (move3){
+			currentPoke.waterspout(enemy);
 		    }
 		}
 	    }
 	}
-    
+    }
 
     /*
     public void enemyTurn(){
