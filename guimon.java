@@ -108,8 +108,6 @@ public class guimon extends JFrame implements ActionListener{
     boolean move3 = false;
     boolean move4 = false;
 
-<<<<<<< HEAD
-
     // WILD POKEMON SETUP
     bulbasaur wildbulb1 = new bulbasaur();
     charmander wildchar1 = new charmander();
@@ -121,11 +119,6 @@ public class guimon extends JFrame implements ActionListener{
     wildpoke.add(wildpik1);
     wildpoke.add(wildsqui1);
     pokemon currentEnemy;
-=======
-    // WILD POKEMON SETUP
-    bulbasaur wildbulb1 = new bulbasaur();
-    
->>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -561,7 +554,6 @@ public class guimon extends JFrame implements ActionListener{
 	    } else if (currentPoke.species == "BULBASAUR"){
 		if (move1){
 		    currentPoke.cut(enemy);
-<<<<<<< HEAD
 		    dialogue.append("BULBASAUR used CUT on " + enemy.species + newline);
 		} else if (move2){
 		    currentPoke.vinewhip(enemy);
@@ -580,25 +572,11 @@ public class guimon extends JFrame implements ActionListener{
 		} else if (move3){
 		    currentPoke.focuspunch(enemy);
 		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + enemy.species + newline);
-=======
-		    dialogue.append("BULBASAUR used CUT");
-		} else if (move2){
-		    currentPoke.vinewhip(enemy);
-		} else if (move3){
-		    currentPoke.vinewhip(enemy);
-		}
-	    } else if (currentPoke.species == "CHARMANDER"){
-		if (move1){
-		    currentPoke.cut(enemy);
-		} else if (move2){
-		    currentPoke.megakick(enemy);
-		} else if (move3){
-		    currentPoke.focuspunch(enemy);
->>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
 		}
 	    } else if (currentPoke.species == "PIKACHU"){
 		if (move1){
 		    currentPoke.headbutt(enemy);
+		    dialogue.append("PIKACHU used HEADBUTT on " + enemy.species + newline);
 		} else if (move2){
 		    currentPoke.voltswitch(enemy);
 		} else if (move3){
