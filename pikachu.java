@@ -19,27 +19,26 @@ public class pikachu extends pokemon{
     //basics
     public void headbutt(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " HEADBUTTS " +other);
 	other.setDefending(true);
     }
 
     public void voltswitch(pokemon other){
 	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " USES VOLT SWITCH ON " +other);
 	other.setDefending(true);
     }
 
     public void thunder(pokemon other){
 	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " USES THUNDER ON " +other);
 	other.setDefending(true);
     }
 
     public void dodge(pokemon other){
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	if (other.getAttackStrength() < 15){
-	    System.out.println(this.getName() + " DODGED the attack!");
-	}
+
+	/*
+	  if (other.getAttackStrength() < 15){
+	  }
+	*/
 	other.assignDamage(this);
     }
     /*

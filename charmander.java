@@ -20,19 +20,16 @@ public class charmander extends pokemon {
     //basics
     public void scratch(pokemon other) {	
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20)); 
-	System.out.println(this.getName() + " SLASHES " +other);
 	other.setDefending(true);
     }
 
     public void megakick(pokemon other){
 	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " MEGAKICKS " +other);
 	other.setDefending(true);
     }
 
     public void focuspunch(pokemon other){
 	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " USES FOCUS PUNCH ON " +other);
 	other.setDefending(true);
     }
 
@@ -40,11 +37,10 @@ public class charmander extends pokemon {
     public void dodge(pokemon other)
     {
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	if (other.getAttackStrength() < 15)
-	    {
-		System.out.println(this.getName() + " DODGED the attack!");
-	    }
-	
+	/*	
+		if (other.getAttackStrength() < 15){
+		}
+	*/
 	other.assignDamage(this);
 	
     }

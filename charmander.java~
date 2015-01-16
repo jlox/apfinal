@@ -2,11 +2,19 @@ import java.util.Random;
 public class charmander extends pokemon {
     Random randomNumber = new Random();
     String type = "FIRE";
+    String species = "CHARMANDER";
+
     public charmander(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
+    }
+
+    public charmander(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
     }
 
     //basics

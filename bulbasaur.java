@@ -21,28 +21,25 @@ public class bulbasaur extends pokemon {
     //basics
     public void cut(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " CUTS "+other);
 	other.setDefending(true);
     }
 
     public void vinewhip(pokemon other){
 	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	System.out.prinlnt(this.getName() + " VINEWHIPS " +other);
 	other.setDefending(true);
     }
 
     public void leafstorm(pokemon other){
 	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	System.out.println(this.getName() + " USES LEAF STORM ON " +other);
 	other.setDefending(true);
     }
 
     //not actual use; used when attacked, see if misses
     public void dodge(pokemon other){
 	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	if (other.getAttackStrength() < 15){
-	    System.out.println(this.getName() + " DODGED the attack!");
-	}
+	/*	if (other.getAttackStrength() < 15){
+		}
+	*/
 	other.assignDamage(this);
     }
 

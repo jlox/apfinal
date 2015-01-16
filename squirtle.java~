@@ -2,11 +2,19 @@ import java.util.Random;
 public class squirtle extends pokemon {
     Random randomNumber = new Random();
     String type = "WATER";
-    public squirtle (String n){
+    String species = "SQUIRTLE";
+
+    public squirtle(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
+    }
+
+    public squirtle(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
     }
 
     //basics

@@ -2,6 +2,8 @@ import java.util.Random;
 public class pikachu extends pokemon{
     Random randomNumber = new Random();
     String type = "ELECTRIC";
+    String species = "PIKACHU";
+
     public pikachu(String n){
 	setStrength(50);
 	setHealth(100);
@@ -9,6 +11,11 @@ public class pikachu extends pokemon{
 	setName(n);
     }
 
+    public pikachu(){
+	setStrength(50);
+	setHealth(100);
+	setSpeed(40);
+    }
     //basics
     public void headbutt(pokemon other){
 	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));

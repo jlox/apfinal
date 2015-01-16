@@ -14,7 +14,7 @@ import java.util.Random;
    6. Add door to return to old map
    7. 
    
- */
+*/
 
 public class guimon extends JFrame implements ActionListener{
 
@@ -71,17 +71,17 @@ public class guimon extends JFrame implements ActionListener{
     // POKEMON INITIALIZATION
 
     /*   
-    bulbasaur bulb1 = new bulbasaur();
-    bulbasaur bulb2 = new bulbasaur();
-    bulbasaur bulb3 = new bulbasaur();
+	 bulbasaur bulb1 = new bulbasaur();
+	 bulbasaur bulb2 = new bulbasaur();
+	 bulbasaur bulb3 = new bulbasaur();
 
-    charmander char1 = new charmander();
-    charmander char2 = new charmander();
-    charmander char3 = new charmander();
+	 charmander char1 = new charmander();
+	 charmander char2 = new charmander();
+	 charmander char3 = new charmander();
 
-    squirtle squi1 = new squirtle();
-    squirtle squi2 = new squirtle();
-    squirtle squi3 = new squirtle();
+	 squirtle squi1 = new squirtle();
+	 squirtle squi2 = new squirtle();
+	 squirtle squi3 = new squirtle();
     */
     
     // RIVAL SETUP
@@ -113,11 +113,14 @@ public class guimon extends JFrame implements ActionListener{
     charmander wildchar1 = new charmander();
     pikachu wildpik1 = new pikachu();
     squirtle wildsqui1 = new squirtle();
-    ArrayList<pokemon> wildpoke = new ArrayList();
-    wildpoke.add(wildbulb1);
-    wildpoke.add(wildchar1);
-    wildpoke.add(wildpik1);
-    wildpoke.add(wildsqui1);
+    ArrayList<pokemon> wildpoke = new ArrayList<pokemon>();
+
+    public void makeWildPoke(){
+	wildpoke.add(wildbulb1);
+	wildpoke.add(wildchar1);
+	wildpoke.add(wildpik1);
+	wildpoke.add(wildsqui1);
+    }
     pokemon currentEnemy;
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -454,7 +457,7 @@ public class guimon extends JFrame implements ActionListener{
 	    
 	}
     
-    // STORYLINE + DIALOGUE FUNCTIONS
+	// STORYLINE + DIALOGUE FUNCTIONS
 
 	public void nameSelect() {
 	    
@@ -553,58 +556,58 @@ public class guimon extends JFrame implements ActionListener{
 		encounter = false;
 	    } else if (currentPoke.species == "BULBASAUR"){
 		if (move1){
-		    currentPoke.cut(enemy);
-		    dialogue.append("BULBASAUR used CUT on " + enemy.species + newline);
+		    currentPoke.cut(currentEnemy);
+		    dialogue.append("BULBASAUR used CUT on " + currentEnemy.species + newline);
 		} else if (move2){
-		    currentPoke.vinewhip(enemy);
-		    dialogue.append("BULBASAUR used VINE WHIP on " + enemy.species + newline);
+		    currentPoke.vinewhip(currentEnemy);
+		    dialogue.append("BULBASAUR used VINE WHIP on " + currentEnemy.species + newline);
 		} else if (move3){
-		    currentPoke.leafstorm(enemy);
-		    dialogue.append("BULBASAUR used LEAF STORM on " + enemy.species + newline);
+		    currentPoke.leafstorm(currentEnemy);
+		    dialogue.append("BULBASAUR used LEAF STORM on " + currentEnemy.species + newline);
 		}
 	    } else if (currentPoke.species == "CHARMANDER"){
 		if (move1){
-		    currentPoke.scratch(enemy);
-		    dialogue.append("CHARMANDER used SCRATCH on " + enemy.species + newline); 
+		    currentPoke.scratch(currentEnemy);
+		    dialogue.append("CHARMANDER used SCRATCH on " + currentEnemy.species + newline); 
 		} else if (move2){
-		    currentPoke.megakick(enemy);
-		    dialogue.append("CHARMANDER used MEGAKICK on " + enemy.species + newline);
+		    currentPoke.megakick(currentEnemy);
+		    dialogue.append("CHARMANDER used MEGAKICK on " + currentEnemy.species + newline);
 		} else if (move3){
-		    currentPoke.focuspunch(enemy);
-		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + enemy.species + newline);
+		    currentPoke.focuspunch(currentEnemy);
+		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + currentEnemy.species + newline);
 		}
 	    } else if (currentPoke.species == "PIKACHU"){
 		if (move1){
-		    currentPoke.headbutt(enemy);
-		    dialogue.append("PIKACHU used HEADBUTT on " + enemy.species + newline);
+		    currentPoke.headbutt(currentEnemy);
+		    dialogue.append("PIKACHU used HEADBUTT on " + currentEnemy.species + newline);
 		} else if (move2){
-		    currentPoke.voltswitch(enemy);
-		    dialogue.append("PIKACHU used VOLT SWITCH on " + enemy.species + newline);
+		    currentPoke.voltswitch(currentEnemy);
+		    dialogue.append("PIKACHU used VOLT SWITCH on " + currentEnemy.species + newline);
 		} else if (move3){
-		    currentPoke.thunder(enemy);
-		    dialogue.append("PIKACHU used THUNDER on " + enemy.species + newline);
+		    currentPoke.thunder(currentEnemy);
+		    dialogue.append("PIKACHU used THUNDER on " + currentEnemy.species + newline);
 		}
 	    } else if (currentPoke.species == "SQUIRTLE"){
 		if (move1){
-		    currentPoke.watergun(enemy);
-		    dialogue.append("SQUIRTLE used WATER GUN on " + enemy.species + newline);
+		    currentPoke.watergun(currentEnemy);
+		    dialogue.append("SQUIRTLE used WATER GUN on " + currentEnemy.species + newline);
 		} else if (move2){
-		    currentPoke.surf(enemy);
-		    dialogue.append("SQUIRTLE used SURF on " + enemy.species + newline);
+		    currentPoke.surf(currentEnemy);
+		    dialogue.append("SQUIRTLE used SURF on " + currentEnemy.species + newline);
 		} else if (move3){
-		    currentPoke.waterspout(enemy);
-		    dialogue.append("SQUIRTLE used WATER SPOUT on " + enemy.species + newline);
+		    currentPoke.waterspout(currentEnemy);
+		    dialogue.append("SQUIRTLE used WATER SPOUT on " + currentEnemy.species + newline);
 		}
 	    }
 	}
     }
 
     /*
-    public void enemyTurn(){
-	if (encounter) {
-	    if
+      public void enemyTurn(){
+      if (encounter) {
+      if
 	    
-    }
+      }
     */
 
     // DRIVER
