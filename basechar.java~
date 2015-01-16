@@ -1,13 +1,12 @@
-import java.util.ArrayList;
-
-public class ash extends basechar{
+public class basechar{
     ArrayList<String> inventory = new ArrayList();
+    private String name = "";
     
     public void inputName(String name){
-	super.inputName(name);
+	this.name = name;
     }
-
     public String getName(){
-	return super.getName();
-    } 
+	return this.name;
+    }
+    
 }

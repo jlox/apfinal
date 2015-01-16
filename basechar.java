@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class basechar{
     ArrayList<String> inventory = new ArrayList();
     private String name = "";

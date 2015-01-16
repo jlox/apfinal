@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ash extends basechar{
     ArrayList<String> inventory = new ArrayList();
     
