@@ -77,4 +77,8 @@ Division of work:
 - Started working on battle sequences
 - Making battle sequence into two parts, yourTurn and enemyTurn
 
-
+1/15/2015
+=======
+- Jeanne - worked on battle function (yourTurn) in guimon.java, added dialogue.
+- Derrick - set up booleans, etc. needed in battle functions
+- Created wildpokemon ArrayList
