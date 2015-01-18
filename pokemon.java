@@ -7,9 +7,26 @@ public abstract class pokemon {
     private int attackStrength;
     private String name;
     private String type;
-    
+    private String species;
+
     public String toString(){
 	return name;
+    }
+
+    public String getType(){
+	return type;
+    }
+
+    public void setType(String n){
+	type = n;
+    }
+
+    public String getSpecies(){
+	return species;
+    }
+
+    public void setSpecies(String n){
+	species = n;
     }
 
     public void assignDamage(pokemon other){
@@ -24,8 +41,8 @@ public abstract class pokemon {
 	attackStrength = s;
     }
     public void lowerAttackStrength(int l){
-	if (attackStrength - l == 0) {
-	    attackStrength = 0;
+	if (attackStrength - l < 0) {
+	    attackStrength = 1;
 	}
 	else
 	    {
@@ -73,7 +90,6 @@ public abstract class pokemon {
     public String getName(){
 	return name;
     }
-    public abstract void run(pokemon Other);
     
     
 

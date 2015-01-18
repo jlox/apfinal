@@ -1,50 +1,64 @@
 import java.util.Random;
 public class charmander extends pokemon {
     Random randomNumber = new Random();
-    String type = "FIRE";
-    String species = "CHARMANDER";
 
     public charmander(String n){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
+	setType("fire");
+	setSpecies("charmander");
     }
 
     public charmander(){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
+	setType("fire");
+	setSpecies("charmander");
     }
 
     //basics
-    public void scratch(pokemon other) {	
-	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20)); 
-	other.setDefending(true);
+    public void tackle(pokemon other) {	
+	this.setAttackStrength(this.getStrength()/5 + randomNumber.nextInt(5)); 
+	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
+	this.assignDamage(other);
+	//	other.setDefending(true);
     }
 
-    public void megakick(pokemon other){
-	this.setAttackStrength(this.getStrength()/8 + randomNumber.nextInt(20));
-	other.setDefending(true);
+    public void ember(pokemon other){
+	if (other.getType() == "grass"){
+	    this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
+	} else {
+	    this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
+	}
+
+	
+	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
+	this.assignDamage(other);
+	//other.setDefending(true);
     }
 
-    public void focuspunch(pokemon other){
-	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	other.setDefending(true);
+    public void flamethrower(pokemon other){
+	if (other.getType() == "grass"){
+	    this.setAttackStrength(this.getStrength()/3+ 5 + randomNumber.nextInt(15));
+	} else {
+	    this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(10));
+	}
+	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
+	this.assignDamage(other);
+	//other.setDefending(true);
     }
 
     //not actual use; used when attacked, see if misses
-    public void dodge(pokemon other)
+    /* public void receive(pokemon other)
     {
-	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	/*	
-		if (other.getAttackStrength() < 15){
-		}
-	*/
+	other.lowerAttackStrength((this.getStrength()/10) +randomNumber.nextInt(5));
 	other.assignDamage(this);
 	
     }
-
+    */
     /*
     public void run (pokemon other)
     {

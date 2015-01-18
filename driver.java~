@@ -1,0 +1,20 @@
+public class driver {
+    public static void main(String[] args){
+	bulbasaur b1 = new bulbasaur();
+	charmander c1 = new charmander();
+	squirtle s1 = new squirtle();
+	c1.flamethrower(s1);
+	System.out.println("Charmanders atk str: "+c1.getAttackStrength());
+	System.out.println("squirtles hp: "+s1.getHealth());
+	c1.flamethrower(b1);
+	System.out.println(b1.getType());
+	System.out.println("Charmanders atk str: "+c1.getAttackStrength());
+	System.out.println("Bulbasaurs hp: "+b1.getHealth());
+	c1.ember(b1);
+	System.out.println("Charmanders atk str: "+c1.getAttackStrength());
+	System.out.println("Bulbasaurs hp: "+b1.getHealth());
+	
+	
+	
+    }
+}

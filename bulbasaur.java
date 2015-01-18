@@ -5,43 +5,65 @@ public class bulbasaur extends pokemon {
     String species = "BULBASAUR";
 
     public bulbasaur(String n){
-	setStrength(50);
+	setStrength(80);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
+	setSpecies("bulbasaur");
+	setType("grass");
     }
     
     public bulbasaur(){
-	setStrength(50);
+	setStrength(80);
 	setHealth(100);
 	setSpeed(40);
+	setSpecies("bulbasaur");
+	setType("grass");
     }
     
 
     //basics
-    public void cut(pokemon other){
-	this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
-	other.setDefending(true);
+    public void tackle(pokemon other){
+	this.setAttackStrength(this.getStrength()/5+randomNumber.nextInt(5));
+	lowerAttackStrength(other.getStrength()/20 + randomNumber.nextInt(5));
+
+	//	other.setDefending(true);
+	this.assignDamage(other);
     }
 
     public void vinewhip(pokemon other){
-	this.setAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	other.setDefending(true);
+	if (other.getType() == "water"){
+	    this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
+	} else {
+	    this.setAttackStrength(this.getStrength()/10 + randomNumber.nextInt(20));
+	}
+
+	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
+
+	this.assignDamage(other);
+	//other.setDefending(true);
     }
 
     public void leafstorm(pokemon other){
-	this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
-	other.setDefending(true);
+	if (other.getType() == "water"){
+	    this.setAttackStrength(this.getStrength()/4 + 5 + randomNumber.nextInt(15));
+	} else {
+	    this.setAttackStrength(this.getStrength()/7 + 5 + randomNumber.nextInt(10));
+	}
+	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
+
+	this.assignDamage(other);
+	//other.setDefending(true);
     }
 
     //not actual use; used when attacked, see if misses
-    public void dodge(pokemon other){
-	other.lowerAttackStrength(this.getStrength()/9 + randomNumber.nextInt(20));
-	/*	if (other.getAttackStrength() < 15){
-		}
-	*/
+    /*    public void receive(pokemon other){
+	other.lowerAttackStrength(this.getStrength()/10 + randomNumber.nextInt(5));
+
+
 	other.assignDamage(this);
     }
+    */
 
     /*
     public void run (pokemon other){
