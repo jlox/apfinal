@@ -93,17 +93,21 @@ public class guimon extends JFrame implements ActionListener{
     // POKEMON INITIALIZATION
 
     
-	 bulbasaur bulb1 = new bulbasaur();
-	 bulbasaur bulb2 = new bulbasaur();
-	 bulbasaur bulb3 = new bulbasaur();
+    bulbasaur bulb1 = new bulbasaur();
+    bulbasaur bulb2 = new bulbasaur();
+    bulbasaur bulb3 = new bulbasaur();
+    
+    charmander char1 = new charmander();
+    charmander char2 = new charmander();
+    charmander char3 = new charmander();
+    
+    squirtle squi1 = new squirtle();
+    squirtle squi2 = new squirtle();
+    squirtle squi3 = new squirtle();
 
-	 charmander char1 = new charmander();
-	 charmander char2 = new charmander();
-	 charmander char3 = new charmander();
-
-	 squirtle squi1 = new squirtle();
-	 squirtle squi2 = new squirtle();
-	 squirtle squi3 = new squirtle();
+    pikachu pika1 = new pikachu();
+    pikachu pika2= new pikachu();
+    pikachu pika3= new pikachu();
     
     
     // RIVAL SETUP
@@ -428,8 +432,8 @@ public class guimon extends JFrame implements ActionListener{
 
 			    myHP.setVisible(true);
 			    enemyHP.setVisible(true);
-			    myHP.setText(currentPoke.getHealth());
-			    enemyHP.setText(currentEnemy.getHealth());
+			    myHP.setText(""+currentPoke.getHealth());
+			    enemyHP.setText(""+currentEnemy.getHealth());
 
 			    if (currentPoke.getSpecies() == "bulbasaur"){
 				enemyPokePic.setIcon(bulbBack);
@@ -831,6 +835,9 @@ public class guimon extends JFrame implements ActionListener{
 	    ashturn = false;
 	    enemyTurn();	  
 	}
+	
+	myHP.setText(""+currentPoke.getHealth());
+	enemyHP.setText(""+currentEnemy.getHealth());
     }
     
     
@@ -907,6 +914,9 @@ public class guimon extends JFrame implements ActionListener{
 	    
 	    ashturn = true;
 	}
+	
+	myHP.setText(""+currentPoke.getHealth());
+	enemyHP.setText(""+currentEnemy.getHealth());
     }
     
 
