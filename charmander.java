@@ -18,7 +18,7 @@ public class charmander extends pokemon {
 	setType("fire");
 	setSpecies("charmander");
     }
-
+    /*
     //basics
     public void tackle(pokemon other) {	
 	this.setAttackStrength(this.getStrength()/5 + randomNumber.nextInt(5)); 

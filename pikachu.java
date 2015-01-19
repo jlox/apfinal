@@ -20,14 +20,17 @@ public class pikachu extends pokemon{
 	setType("electric");
     }
     //basics
-    public void tackle(pokemon other){
+    /*
+    //tackle
+    public void attack1(pokemon other){
 	this.setAttackStrength(this.getStrength()/5 + randomNumber.nextInt(5));
 	lowerAttackStrength((other.getStrength()/20) +randomNumber.nextInt(5));
 	this.assignDamage(other);
 	//	other.setDefending(true);
     }
 
-    public void voltswitch(pokemon other){
+    // volt 
+    public void attack2(pokemon other){
 	if (other.getType() == "water"){
 	    this.setAttackStrength(this.getStrength()/7 + randomNumber.nextInt(20));
 	} else {
@@ -38,7 +41,8 @@ public class pikachu extends pokemon{
 	//	other.setDefending(true);
     }
 
-    public void thunder(pokemon other){
+    //thunder
+    public void attack3(pokemon other){
 	if (other.getType() == "water"){
 	    this.setAttackStrength(this.getStrength()/3+ 5 + randomNumber.nextInt(15));
 	} else {

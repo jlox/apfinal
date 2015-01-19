@@ -19,7 +19,7 @@ public class squirtle extends pokemon {
 	setType("water");
 	setSpecies("squirtle");
     }
-
+    /*
     //basics
     public void tackle(pokemon other){
 	this.setAttackStrength(this.getStrength()/5 + randomNumber.nextInt(5)); 

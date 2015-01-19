@@ -21,7 +21,7 @@ public class bulbasaur extends pokemon {
 	setType("grass");
     }
     
-
+    /*
     //basics
     public void tackle(pokemon other){
 	this.setAttackStrength(this.getStrength()/5+randomNumber.nextInt(5));
