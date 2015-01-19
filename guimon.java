@@ -247,8 +247,6 @@ public class guimon extends JFrame implements ActionListener{
 	pane.add(enemyPokePic);
 	pane.add(enemyHP);
 	titleblock.setIcon(titleicon);
-	yourPokePic.setIcon(squiBack);
-	enemyPokePic.setIcon(pikaFront);
 	yourPokePic.setVisible(false);
 	enemyPokePic.setVisible(false);
 	titleblock.setVisible(true);
@@ -350,11 +348,8 @@ public class guimon extends JFrame implements ActionListener{
 			    if (input.toUpperCase() == "CHARMANDER"){
 				 party[catchnum] = char1;
 			    }
-			    if (input.toUpperCase() == "PIKACHU"){
-				 party[catchnum] = pika1;
-			    }
 			    catchnum = catchnum + 1;
-			} else if (input.isEmpty() || input.toUpperCase() != "PIKACHU" || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
+			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
 			    party[catchnum] = bulb1;
 			    catchnum = catchnum + 1;
 			} else if (input == null){
