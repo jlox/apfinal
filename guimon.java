@@ -144,21 +144,21 @@ public class guimon extends JFrame implements ActionListener{
     String moveName2 = "";
     String moveName3 = "";
 
-    public void getMoveNames(pokemon p){
+    public void getMoveNames(){
 	moveName1 = "TACKLE";
-	if (p.getSpecies() == "bulbasaur"){
+	if (party[pokenum].getSpecies() == "bulbasaur"){
 	    moveName2 = "VINEWHIP";
 	    moveName3 = "LEAFSTORM";
 	}
-	if (p.getSpecies() == "charmander"){
+	if (party[pokenum].getSpecies() == "charmander"){
 	    moveName3 = "EMBER";
 	    moveName3 = "FLAMETHROWER";
 	}
-	if (p.getSpecies() == "squirtle"){
+	if (party[pokenum].getSpecies() == "squirtle"){
 	    moveName2 = "WATERSPOUT";
 	    moveName3 = "WATERGUN";
 	}
-	if (p.getSpecies() == "pikachu"){
+	if (party[pokenum].getSpecies() == "pikachu"){
 	    moveName2 = "VOLTSWITCH";
 	    moveName3 = "THUNDER";
 	}
@@ -216,7 +216,7 @@ public class guimon extends JFrame implements ActionListener{
     }
 
     public guimon(){
-	currentPoke = bulb1;
+	// currentPoke = bulb1;
 	makeWildPoke();
 	getCurrentMap();
 	g.makehome();
@@ -338,6 +338,7 @@ public class guimon extends JFrame implements ActionListener{
 		    
 		    if (input3){
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
+			dialogue.append(input+newline);
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
 			    if (input.toUpperCase() == "BULBASAUR"){
 				party[catchnum] = bulb1;
@@ -352,10 +353,10 @@ public class guimon extends JFrame implements ActionListener{
 			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
 			    party[catchnum] = bulb1;
 			    catchnum = catchnum + 1;
-			} else if (input == null){
+			}/* else if (input == null){
 			    party[catchnum] = bulb1;
 			    catchnum = catchnum + 1;
-			}
+			    }*/
 			input3 = false;
 			talkedToOak2 = true;
 			send.setVisible(false);
@@ -366,17 +367,18 @@ public class guimon extends JFrame implements ActionListener{
 		    // FOR BATTLING
 
 		    if (encounter && ashturn){
-			
-			String[] options = new String[] {moveName1, moveName2, moveName3};
-			int response = JOptionPane.showOptionDialog(null, "Choose an attack!", "BATTLE!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-			if (response == 0){
-			    move1 = true;
-			} else if (response == 1){
-			    move2 = true;
-			} else if (response == 2){
-			    move3 = true;
+			if (currentPoke.getSpecies() == "bulbasaur"){
+			    String[] options = new String[] {"TACKLE", "VINEWHIP", "NIPPLE PUNCH"};
+			    int response = JOptionPane.showOptionDialog(null, "Choose an attack!", "BATTLE!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+			    if (response == 0){
+				move1 = true;
+			    } else if (response == 1){
+				move2 = true;
+			    } else if (response == 2){
+				move3 = true;
+			    }
+			    yourTurn();
 			}
-			yourTurn();
 		    }
 		}
 	    });
@@ -418,11 +420,18 @@ public class guimon extends JFrame implements ActionListener{
 			    encounter = true;
 			    canMove = false;
 			    send.setText("CHOOSE AN ATTACK!");
-			    getCurrentPoke();
-			    getCurrentEnemy();
-			    getMoveNames(currentPoke);
-			    dialogue.append("Your "+currentPoke.getSpecies());
-			    dialogue.append(" has encounter a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline);
+			    // CurrentPoke();
+			    // getCurrentEnemy();
+			    // getMoveNames(currentPoke);
+			    // getMoveNames();
+			    currentPoke = party[pokenum];
+			    currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
+			    
+			    System.out.println(currentPoke.getSpecies());
+			    
+			    System.out.println(currentEnemy.getSpecies());
+			    
+			    dialogue.append("Your "+currentPoke.getSpecies()+" has encountered a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline);
 
 
 			    myHP.setVisible(true);
