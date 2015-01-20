@@ -427,7 +427,7 @@ public class guimon extends JFrame implements ActionListener{
 			    currentPoke = party[pokenum];
 			    currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
 			    
-			    System.out.println(currentPoke.getSpecies());
+			    System.out.println(currentPoke.getSpecies()); // THIS IS THE PROBLEM
 			    
 			    System.out.println(currentEnemy.getSpecies());
 			    
