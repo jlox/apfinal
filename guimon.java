@@ -109,7 +109,7 @@ public class guimon extends JFrame implements ActionListener{
     pikachu pika2= new pikachu();
     pikachu pika3= new pikachu();
     
-    
+    String whichPoke;
     // RIVAL SETUP
     String rivalName = "";
     String rivalStarter;
@@ -339,32 +339,29 @@ public class guimon extends JFrame implements ActionListener{
 		    if (input3){
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
 			dialogue.append(input+newline);
-			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
-			    if (input.toUpperCase() == "BULBASAUR"){
-				party[catchnum] = bulb1;
-			    } else if (input.toUpperCase() == "SQUIRTLE"){
-				party[catchnum] = squi1;
-			    } else if (input.toUpperCase() == "CHARMANDER"){
-				 party[catchnum] = char1;
-			    } else {
-				party[catchnum] = bulb1;
-			    }
-			    // catchnum = catchnum + 1;
-			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
-			    party[catchnum] = bulb1;
-			    // catchnum = catchnum + 1;
-			}/* else if (input == null){
-			    party[catchnum] = bulb1;
-			    catchnum = catchnum + 1;
-			    }*/
-			else {
-			    party[catchnum] = bulb1;
-			    // catchnum = catchnum + 1;
+			if (((input != null) && (!input.isEmpty())) || input.toUpperCase() == "BULBASAUR" || input.toUpperCase() == "CHARMANDER" || input.toUpperCase() == "SQUIRTLE") {
+			    whichPoke = input.toUpperCase();
+			} else if (input.isEmpty() /* && whichInput == 1*/) {
+			    whichPoke = "BULBASAUR";
 			}
+
+			
+			if (whichPoke == "BULBASAUR"){
+			    party[catchnum] = bulb1;
+			} else if (whichPoke == "SQUIRTLE"){
+			    party[catchnum] = squi1;
+			} else if (whichPoke == "CHARMANDER"){
+			    party[catchnum] = char1;
+			} else {
+			    party[catchnum] = bulb1;
+			}
+			catchnum = catchnum + 1;
+			
 			input3 = false;
 			talkedToOak2 = true;
 			send.setVisible(false);
-			dialogue.append("Great decision."+newline+endline+newline);
+			dialogue.append("Great decision! "+newline);
+			dialogue.append("You picked "+party[catchnum-1].getSpecies() + "!"+newline + endline+newline);
 			goTalk.setVisible(true);
 			door1 = true;
 			dialogue.append(party[pokenum].getSpecies());
