@@ -346,7 +346,8 @@ public class guimon extends JFrame implements ActionListener{
 			}
 
 			
-			if (whichPoke == "BULBASAUR"){
+			/*
+			  if (whichPoke == "BULBASAUR"){
 			    party[catchnum] = bulb1;
 			} else if (whichPoke == "SQUIRTLE"){
 			    party[catchnum] = squi1;
@@ -355,6 +356,7 @@ public class guimon extends JFrame implements ActionListener{
 			} else {
 			    party[catchnum] = bulb1;
 			}
+			*/
 			catchnum = catchnum + 1;
 			
 			input3 = false;
@@ -388,7 +390,17 @@ public class guimon extends JFrame implements ActionListener{
 	pane.add(goTalk);
     }
 	    
-	    	
+    public void addPoke(){
+	if (whichPoke == "BULBASAUR"){
+	    party[catchnum] = bulb1;
+	} else if (whichPoke == "SQUIRTLE"){
+	    party[catchnum] = squi1;
+	} else if (whichPoke == "CHARMANDER"){
+	    party[catchnum] = char1;
+	} else {
+	    party[catchnum] = bulb1;
+	}
+    }
  
     public void actionPerformed(ActionEvent e) {}
 	
@@ -667,7 +679,7 @@ public class guimon extends JFrame implements ActionListener{
 	}
     
 	// STORYLINE + DIALOGUE FUNCTIONS
-
+    
 	public void nameSelect() {
 	    
 	    String g1 = " Welcome to the world of Pokemon!";
