@@ -82,3 +82,12 @@ Division of work:
 - Jeanne - worked on battle function (yourTurn) in guimon.java, added dialogue.
 - Derrick - set up booleans, etc. needed in battle functions
 - Created wildpokemon ArrayList
+
+1/22/2015
+=======
+- Derrick - fixed up Battle functionality, added heal method
+     NEED TO FIX:
+  	  - need to make wild pokemon weaker (from constructor)
+	  - need to fix checkDeath()
+	  - user should teleport back to a Pokemon center after death
+	  - squirtle cannot attack bulbasaur or vice versa
