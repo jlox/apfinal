@@ -17,6 +17,10 @@ import java.util.Random;
    
 */
 
+
+// ADD CONSTRUCTOR FOR POKEMON AND MAKE WILD WEAKER!!!!!!!!
+
+
 public class guimon extends JFrame implements ActionListener{
 
     Random randomNumber = new Random();
@@ -86,6 +90,7 @@ public class guimon extends JFrame implements ActionListener{
     String starter;
     String attackMethod;
     String currentString;
+    boolean dead = false;
     //    pokemon currentPoke;
     
     // String[] party = new String[6];
@@ -215,6 +220,9 @@ public class guimon extends JFrame implements ActionListener{
 	} else if (mapnum == 4){
 	    currentMap = g.showMap(g.thi);
 	    defaultMap = g.thi;
+	} else if (mapnum == 5){
+	    currentMap = g.showMap(g.fou);
+	    defaultMap = g.fou;
 	}
     }
     
@@ -227,6 +235,8 @@ public class guimon extends JFrame implements ActionListener{
 	g.makesec();
 	g.makelab();
 	g.makethi();
+	g.makefou();
+
 
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
@@ -357,7 +367,6 @@ public class guimon extends JFrame implements ActionListener{
 			    dialogue.append("You picked "+party[catchnum].getSpecies()+"!"+newline + endline+newline);
 			    goTalk.setVisible(true);
 			    door1 = true;
-			    dialogue.append(party[pokenum].getSpecies());
 			    catchnum = catchnum + 1;
 			/*
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
@@ -427,8 +436,7 @@ public class guimon extends JFrame implements ActionListener{
 	pane.add(goTalk);
     }
 	    
-    public boolean checkDead(){
-	boolean dead = false;
+    public void checkDead(){
 	int check = 0;
 	for (int i = 0;i<catchnum;i++){
 	    if (party[i].getHealth() <= 0){
@@ -438,9 +446,16 @@ public class guimon extends JFrame implements ActionListener{
 	if (check == (catchnum - 1)){
 	    dead = true;
 	}
-	return dead;
     }
  
+
+    public void heal(){
+	for (int i = 0;i<catchnum;i++){
+	    party[i].setHealth(100);
+	}
+	dead = false;
+    }
+
     public void actionPerformed(ActionEvent e) {}
 	
 
@@ -484,7 +499,7 @@ public class guimon extends JFrame implements ActionListener{
 			    
 			    System.out.println(currentEnemy.getSpecies());
 			    
-			    dialogue.append("Your "+party[pokenum].getSpecies()+" has encountered a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline);
+			    dialogue.append("Your "+party[pokenum].getSpecies()+" encounters a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline+endline+newline+endline+newline);
 
 
 			    myHP.setVisible(true);
@@ -607,6 +622,15 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append("SQUIRTLE - THE WATER-TYPE POKEMON"+newline);
 		    dialogue.append(endline+newline);	
 		}
+		
+		if ((mapnum == 4) && 
+		    (((ycor == 7) && 
+		      ((xcor == 5) || (xcor == 7))) || 
+		     ((ycor == 8) && (xcor == 6)))){
+		    canMove = false;
+		    goTalk.setVisible(true);
+		    infoTalk(0);
+		}
 
 
 		// DOOR FUNCTIONS
@@ -707,15 +731,38 @@ public class guimon extends JFrame implements ActionListener{
 			    allowedBlock = ' ';
 			    oldtile = ' ';
 			}
+			if ((ycor == 5) && (xcor == 23)){
+			    mapnum = 5;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 10;
+			    xcor = 2;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
 		    }
+		    if (mapnum == 5){
+			if ((ycor == 10) && (xcor == 1)){
+			    mapnum = 4;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 5;
+			    xcor = 22;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+		    }
+		    
 		}
 		
 		defaultMap[ycor][xcor] = '@';
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
-	    }
 	    
+	    }
 	}
     
 	// STORYLINE + DIALOGUE FUNCTIONS
@@ -770,9 +817,32 @@ public class guimon extends JFrame implements ActionListener{
 	    
 	}
 
+	public void infoTalk(int i){
+	    if (i == 0){
+		dialogue("I've restored all of your Pokemon to full HP."+newline);
+		dialogue.append("Be wary of the tall grass, marked by (!)." + newline);
+		dialogue.append("It's said to be inhabited by wild Pokemon."+newline);
+		dialogue.append(endline+newline);
+		heal();
+	    }
 
+	    if (i == 1){
+		
+	    }
+	    if (i == 2){
+
+	    }
+	    if (i == 3){
+
+	    }
+	    if (i == 4){
+
+	    }
+
+
+	}
 	
-  
+	
 	    
     
 
@@ -811,6 +881,12 @@ public class guimon extends JFrame implements ActionListener{
     public void getCurrentEnemy(){
 	currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
     }
+
+    public void healWild(){
+	for (int i = 0;i<wildpoke.size();i++){
+	    wildpoke.get(i).setHealth(100);
+	}
+    }
    
 
     // We have to find a different way to store the current pokemon.
@@ -825,17 +901,18 @@ public class guimon extends JFrame implements ActionListener{
 		text.setVisible(true);
 		send.setVisible(false);
 		ashturn = true;
-		canMove = true;
+
+		goTalk.setVisible(true);
 		myHP.setVisible(false);
 		enemyHP.setVisible(false);
 		versus.setVisible(false);
 		yourPokePic.setVisible(false);
 		enemyPokePic.setVisible(false);
-		if (checkDead()){
+		checkDead();
+		if (dead){
 		    dialogue.append("You have run out of usable pokemon!"+newline);
 		    dialogue.append("You will be sent to the nearest Pokemon Center."+newline);
 		    dialogue.append(endline+newline);
-		    
 		}
 	    } else if (party[pokenum].getSpecies() == "bulbasaur"){
 		if (move1){
@@ -898,7 +975,6 @@ public class guimon extends JFrame implements ActionListener{
 	    move1 = false;
 	    move2 = false;
 	    move3 = false;
-	    ashturn = false;
 	    enemyTurn();	  
 	}
 	
@@ -916,13 +992,16 @@ public class guimon extends JFrame implements ActionListener{
 		text.setVisible(true);	
 		send.setVisible(false); 
 		ashturn = true;
-		canMove = true;
-
+		goTalk.setVisible(true);
+		dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!");
 		myHP.setVisible(false);
 		enemyHP.setVisible(false);
 		versus.setVisible(false);
 		yourPokePic.setVisible(false);
 		enemyPokePic.setVisible(false);
+		
+		healWild();
+		
 	    } else if (party[pokenum].getSpecies() == "bulbasaur"){
 		if (rand == 0){
 		    currentEnemy.attack2(party[pokenum]);
