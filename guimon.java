@@ -174,17 +174,30 @@ public class guimon extends JFrame implements ActionListener{
     
 
     // WILD POKEMON SETUP
+    /*
     bulbasaur wildbulb1 = new bulbasaur(30);
     charmander wildchar1 = new charmander(30);
-    pikachu wildpika1 = new pikachu(30);
     squirtle wildsqui1 = new squirtle(30);
+    */
+    
+    pikachu wildpika1 = new pikachu(30);
+    pidgey wildpidg1 = new pidgey(30);
+    furret wildfurr1 = new furret(30);
+    rattata wildrat1 = new rattata(30);
+    
     ArrayList<pokemon> wildpoke = new ArrayList<pokemon>();
 
     public void makeWildPoke(){
+	/*
 	wildpoke.add(wildbulb1);
 	wildpoke.add(wildchar1);
-	wildpoke.add(wildpika1);
 	wildpoke.add(wildsqui1);
+	*/
+	wildpoke.add(wildpika1);
+	wildpoke.add(wildpidg1);
+	wildpoke.add(wildrat1);
+	wildpoke.add(wildfurr1);
+				
     }
 
     
@@ -892,8 +905,22 @@ public class guimon extends JFrame implements ActionListener{
 	}
     }
    
-
-    // We have to find a different way to store the current pokemon.
+   
+    public void teleportPC(){
+	mapnum = 5;
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
+	ycor = 6;
+	xcor = 13;
+	allowedBlock = ' ';
+	oldtile = ' ';
+	
+	defaultMap[ycor][xcor] = '@';
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
+    }
 
 
     
@@ -985,17 +1012,7 @@ public class guimon extends JFrame implements ActionListener{
 	myHP.setText(""+party[pokenum].getHealth());
 	enemyHP.setText(""+currentEnemy.getHealth());
     }
-    
-    public void teleportPC(){
-	mapnum = 5;
-	getCurrentMap();
-	swagger = currentMap;
-	text.setText(swagger);
-	ycor = 6;
-	xcor = 13;
-	allowedBlock = ' ';
-	oldtile = ' ';
-    }
+ 
     public void enemyTurn(){
 	int rand = randomNumber.nextInt(3);
 	if (encounter) {
@@ -1015,7 +1032,8 @@ public class guimon extends JFrame implements ActionListener{
 		healWild();
 		checkDead();
 		if (!dead){
-		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!");
+		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!"+newline);
+		    dialogue.append(endline+newline);
 		}
 		if (dead){
 		    dialogue.append("You have run out of usable pokemon!"+newline);
@@ -1025,57 +1043,71 @@ public class guimon extends JFrame implements ActionListener{
 	    } else if (currentEnemy.getSpecies() == "bulbasaur"){
 		if (rand == 0){
 		    currentEnemy.attack1(party[pokenum]);
-		    dialogue.append("Enemy BULBASAUR used TACKLE on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy BULBASAUR used TACKLE on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 1){
 		    currentEnemy.attack2(party[pokenum]);
-		    dialogue.append("Enemy BULBASAUR used VINE WHIP on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy BULBASAUR used VINE WHIP on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 2){
 		    currentEnemy.attack3(party[pokenum]);
-		    dialogue.append("Enemy BULBASAUR used LEAF STORM on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy BULBASAUR used LEAF STORM on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		}
 	    } else if (currentEnemy.getSpecies() == "charmander"){
 		if (rand == 0){
 		    currentEnemy.attack1(party[pokenum]);
-		    dialogue.append("Enemy CHARMANDER used CUT on your " + party[pokenum].getSpecies().toUpperCase()  + newline); 
+		    dialogue.append("Enemy CHARMANDER used CUT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline); 
 		    dialogue.append(endline+newline);
 		} else if (rand == 1){
 		    currentEnemy.attack2(party[pokenum]);
-		    dialogue.append("Enemy CHARMANDER used EMBER on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy CHARMANDER used EMBER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 2){
 		    currentEnemy.attack3(party[pokenum]);
-		    dialogue.append("Enemy CHARMANDER used FLAMETHROWER on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy CHARMANDER used FLAMETHROWER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		}
 	    } else if (currentEnemy.getSpecies() == "pikachu"){
 		if (rand == 0){
 		    currentEnemy.attack1(party[pokenum]);
-		    dialogue.append("Enemy PIKACHU used HEADBUTT on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy PIKACHU used HEADBUTT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 1){
 		    currentEnemy.attack2(party[pokenum]);
-		    dialogue.append("Enemy PIKACHU used SPARK on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy PIKACHU used SPARK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 2){
 		    currentEnemy.attack3(party[pokenum]);
-		    dialogue.append("Enemy PIKACHU used THUNDER on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy PIKACHU used THUNDER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		}
 	    } else if (currentEnemy.getSpecies() == "squirtle"){
 		if (rand == 0){
 		    currentEnemy.attack1(party[pokenum]);
-		    dialogue.append("Enemy SQUIRTLE used SCRATCH on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy SQUIRTLE used SCRATCH on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 1){
 		    currentEnemy.attack2(party[pokenum]);
-		    dialogue.append("Enemy SQUIRTLE used WATERSPOUT on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append("Enemy SQUIRTLE used WATERSPOUT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 2){
 		    currentEnemy.attack3(party[pokenum]);
-		    dialogue.append("Enemy SQUIRTLE used WATERGUN on your " + party[pokenum].getSpecies().toUpperCase() + newline);
+		    dialogue.append("Enemy SQUIRTLE used WATERGUN on"+newline+" your " + party[pokenum].getSpecies().toUpperCase() + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "pidgey"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used PECK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used WING ATTACK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used SCRATCH on"+newline+" your " + party[pokenum].getSpecies().toUpperCase() + newline);
 		    dialogue.append(endline+newline);
 		}
 	    }
