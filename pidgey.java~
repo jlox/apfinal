@@ -1,0 +1,8 @@
+import java.util.Random;
+public class pidgey extends pokemon {
+    random randomNumber = new Random();
+    String species = "PIDGEY";
+
+    public pidgey(String n){
+	setStrength(
+}
