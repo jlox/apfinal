@@ -174,10 +174,10 @@ public class guimon extends JFrame implements ActionListener{
     
 
     // WILD POKEMON SETUP
-    bulbasaur wildbulb1 = new bulbasaur();
-    charmander wildchar1 = new charmander();
-    pikachu wildpika1 = new pikachu();
-    squirtle wildsqui1 = new squirtle();
+    bulbasaur wildbulb1 = new bulbasaur(30);
+    charmander wildchar1 = new charmander(30);
+    pikachu wildpika1 = new pikachu(30);
+    squirtle wildsqui1 = new squirtle(30);
     ArrayList<pokemon> wildpoke = new ArrayList<pokemon>();
 
     public void makeWildPoke(){
@@ -291,6 +291,10 @@ public class guimon extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 		    if (!(talkedToOak1)){
 			talkedToOak1 = true;
+		    }
+		    if (dead){
+			heal();
+			teleportPC();
 		    }
 		    if ((!(sawCharm)) &&
 			((mapnum == 3) &&
@@ -982,7 +986,16 @@ public class guimon extends JFrame implements ActionListener{
 	enemyHP.setText(""+currentEnemy.getHealth());
     }
     
-    
+    public void teleportPC(){
+	mapnum = 5;
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
+	ycor = 6;
+	xcor = 13;
+	allowedBlock = ' ';
+	oldtile = ' ';
+    }
     public void enemyTurn(){
 	int rand = randomNumber.nextInt(3);
 	if (encounter) {
@@ -993,7 +1006,6 @@ public class guimon extends JFrame implements ActionListener{
 		send.setVisible(false); 
 		ashturn = true;
 		goTalk.setVisible(true);
-		dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!");
 		myHP.setVisible(false);
 		enemyHP.setVisible(false);
 		versus.setVisible(false);
@@ -1001,10 +1013,18 @@ public class guimon extends JFrame implements ActionListener{
 		enemyPokePic.setVisible(false);
 		
 		healWild();
-		
-	    } else if (party[pokenum].getSpecies() == "bulbasaur"){
+		checkDead();
+		if (!dead){
+		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!");
+		}
+		if (dead){
+		    dialogue.append("You have run out of usable pokemon!"+newline);
+		    dialogue.append("You will be sent to the nearest Pokemon Center."+newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "bulbasaur"){
 		if (rand == 0){
-		    currentEnemy.attack2(party[pokenum]);
+		    currentEnemy.attack1(party[pokenum]);
 		    dialogue.append("Enemy BULBASAUR used TACKLE on your " + party[pokenum].getSpecies().toUpperCase()  + newline);
 		    dialogue.append(endline+newline);
 		} else if (rand == 1){

@@ -1,20 +1,26 @@
 import java.util.Random;
 public class bulbasaur extends pokemon {
     Random randomNumber = new Random();
-    String type = "GRASS";
-    String species = "BULBASAUR";
 
     public bulbasaur(String n){
-	setStrength(80);
+	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
 	setSpecies("bulbasaur");
 	setType("grass");
     }
+
+    public bulbasaur (int n){
+	setStrength(n);
+	setHealth(100);
+	setSpeed(40);
+	setSpecies("bulbasaur");
+	setType("grass");
+    }
     
     public bulbasaur(){
-	setStrength(80);
+	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setSpecies("bulbasaur");

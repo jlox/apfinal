@@ -11,6 +11,14 @@ public class charmander extends pokemon {
 	setSpecies("charmander");
     }
 
+    public charmander(int n){
+	setStrength(n);
+	setHealth(100);
+	setSpeed(40);
+	setType("fire");
+	setSpecies("charmander");
+    }
+    
     public charmander(){
 	setStrength(50);
 	setHealth(100);

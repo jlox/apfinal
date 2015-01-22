@@ -3,7 +3,7 @@ public class pikachu extends pokemon{
     Random randomNumber = new Random();
 
     public pikachu(String n){
-	setStrength(80);
+	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setName(n);
@@ -11,9 +11,15 @@ public class pikachu extends pokemon{
 	setType("electric");
 	
     }
-
+    public pikachu(int n){	
+	setStrength(n);
+	setHealth(100);
+	setSpeed(40);
+	setSpecies("pikachu");
+	setType("electric");
+    }
     public pikachu(){
-	setStrength(80);
+	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
 	setSpecies("pikachu");
