@@ -819,7 +819,7 @@ public class guimon extends JFrame implements ActionListener{
 
 	public void infoTalk(int i){
 	    if (i == 0){
-		dialogue("I've restored all of your Pokemon to full HP."+newline);
+		dialogue.append("I've restored all of your Pokemon to full HP."+newline);
 		dialogue.append("Be wary of the tall grass, marked by (!)." + newline);
 		dialogue.append("It's said to be inhabited by wild Pokemon."+newline);
 		dialogue.append(endline+newline);
