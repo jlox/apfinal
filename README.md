@@ -86,6 +86,7 @@ Division of work:
 1/22/2015
 =======
 - Derrick - fixed up Battle functionality, added heal method
+- Jeanne - added pokemon files, added more maps, worked on adapting enemy strength to own
      NEED TO FIX:
   	  - need to make wild pokemon weaker (from constructor)
 	  - need to fix checkDeath()
