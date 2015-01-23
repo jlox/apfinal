@@ -1,6 +1,6 @@
 import java.util.Random;
 public class pidgey extends pokemon {
-    random randomNumber = new Random();
+    Random randomNumber = new Random();
     String species = "PIDGEY";
 
     public pidgey(int n){

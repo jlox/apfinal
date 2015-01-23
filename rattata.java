@@ -1,6 +1,6 @@
 import java.util.Random;
 public class rattata extends pokemon {
-    random randomNumber = new Random();
+    Random randomNumber = new Random();
     String species = "RATTATA";
 
     public rattata(int n){

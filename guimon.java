@@ -86,6 +86,7 @@ public class guimon extends JFrame implements ActionListener{
 
     // CHARACTER SETUP
     int whichInput = 0;
+    int exp = 5;
     String newName = "";
     String starter;
     String attackMethod;
@@ -927,6 +928,7 @@ public class guimon extends JFrame implements ActionListener{
     public void yourTurn(){ // edit the "enemy" and boolean things
 	if (encounter) {
 	    text.setVisible(false);
+	    currentEnemy.setStrength(party[pokenum].getStrength() + (randomNumber.nextInt(6) - 5));
 	    if (party[pokenum].getHealth() <= 0){
 		encounter = false;
 		text.setVisible(true);
@@ -1034,6 +1036,7 @@ public class guimon extends JFrame implements ActionListener{
 		if (!dead){
 		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!"+newline);
 		    dialogue.append(endline+newline);
+		    party[pokenum].setStrength(party[pokenum].getStrength() + exp);
 		}
 		if (dead){
 		    dialogue.append("You have run out of usable pokemon!"+newline);

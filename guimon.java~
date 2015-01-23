@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -14,7 +15,11 @@ import java.util.Random;
    6. Add door to return to old map
    7. 
    
- */
+*/
+
+
+// ADD CONSTRUCTOR FOR POKEMON AND MAKE WILD WEAKER!!!!!!!!
+
 
 public class guimon extends JFrame implements ActionListener{
 
@@ -36,9 +41,33 @@ public class guimon extends JFrame implements ActionListener{
     JScrollPane scroll = new JScrollPane(dialogue, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     JButton send = new JButton();
     JButton goTalk = new JButton("OK");
+
+    JLabel yourPokePic = new JLabel();
+    JLabel enemyPokePic = new JLabel();
+    JLabel titleblock = new JLabel();
+    JLabel versus = new JLabel();
+    ImageIcon titleicon = new ImageIcon("javamon.PNG");
+    
+    JTextArea myHP = new JTextArea();
+    JTextArea enemyHP = new JTextArea();
     JButton ability1 = new JButton();
     JButton ability2 = new JButton();
     JButton ability3 = new JButton();
+
+    // IMAGE SETUP
+    ImageIcon charFront = new ImageIcon("charmanderfront.png");
+    ImageIcon charBack = new ImageIcon("charmanderback.png");
+
+    ImageIcon squiFront = new ImageIcon("squirtlefront.png");
+    ImageIcon squiBack = new ImageIcon("squirtleback.png");
+
+    ImageIcon bulbFront = new ImageIcon("bulbasaurfront.png");
+    ImageIcon bulbBack = new ImageIcon("bulbasaurback.png");
+    
+    ImageIcon pikaFront = new ImageIcon("pikachufront.png");
+    ImageIcon pikaBack = new ImageIcon("pikachuback.png");
+
+    ImageIcon vs = new ImageIcon("VS.png");
 
     // MAP SETUP
     int ycor = 5;
@@ -48,6 +77,7 @@ public class guimon extends JFrame implements ActionListener{
     char oldtile = ' ';
     char allowedBlock = ' ';
     char door = '+';
+    char grass = '!';
     int ybound;
     int xbound;
     int mapnum = 0;
@@ -59,9 +89,9 @@ public class guimon extends JFrame implements ActionListener{
     String newName = "";
     String starter;
     String attackMethod;
-    boolean encounter = false;
     String currentString;
-    pokemon currentPoke;
+    boolean dead = false;
+    //    pokemon currentPoke;
     
     // String[] party = new String[6];
     pokemon[] party = new pokemon[6];
@@ -70,20 +100,24 @@ public class guimon extends JFrame implements ActionListener{
 
     // POKEMON INITIALIZATION
 
-    /*   
+    
     bulbasaur bulb1 = new bulbasaur();
     bulbasaur bulb2 = new bulbasaur();
     bulbasaur bulb3 = new bulbasaur();
-
+    
     charmander char1 = new charmander();
     charmander char2 = new charmander();
     charmander char3 = new charmander();
-
+    
     squirtle squi1 = new squirtle();
     squirtle squi2 = new squirtle();
     squirtle squi3 = new squirtle();
-    */
+
+    pikachu pika1 = new pikachu();
+    pikachu pika2= new pikachu();
+    pikachu pika3= new pikachu();
     
+    String whichPoke;
     // RIVAL SETUP
     String rivalName = "";
     String rivalStarter;
@@ -106,26 +140,66 @@ public class guimon extends JFrame implements ActionListener{
     boolean move1 = false;
     boolean move2 = false;
     boolean move3 = false;
-    boolean move4 = false;
 
-<<<<<<< HEAD
-
-    // WILD POKEMON SETUP
-    bulbasaur wildbulb1 = new bulbasaur();
-    charmander wildchar1 = new charmander();
-    pikachu wildpik1 = new pikachu();
-    squirtle wildsqui1 = new squirtle();
-    ArrayList<pokemon> wildpoke = new ArrayList();
-    wildpoke.add(wildbulb1);
-    wildpoke.add(wildchar1);
-    wildpoke.add(wildpik1);
-    wildpoke.add(wildsqui1);
-    pokemon currentEnemy;
-=======
-    // WILD POKEMON SETUP
-    bulbasaur wildbulb1 = new bulbasaur();
+    boolean encounter = false;
     
->>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
+    boolean ashturn = true;
+    boolean garyturn = false;
+
+    pokemon currentEnemy;
+
+    String moveName1 = "";
+    String moveName2 = "";
+    String moveName3 = "";
+
+    public void getMoveNames(){
+	moveName1 = "TACKLE";
+	if (party[pokenum].getSpecies() == "bulbasaur"){
+	    moveName2 = "VINEWHIP";
+	    moveName3 = "LEAFSTORM";
+	}
+	if (party[pokenum].getSpecies() == "charmander"){
+	    moveName3 = "EMBER";
+	    moveName3 = "FLAMETHROWER";
+	}
+	if (party[pokenum].getSpecies() == "squirtle"){
+	    moveName2 = "WATERSPOUT";
+	    moveName3 = "WATERGUN";
+	}
+	if (party[pokenum].getSpecies() == "pikachu"){
+	    moveName2 = "VOLTSWITCH";
+	    moveName3 = "THUNDER";
+	}
+    }
+    
+
+    // WILD POKEMON SETUP
+    /*
+    bulbasaur wildbulb1 = new bulbasaur(30);
+    charmander wildchar1 = new charmander(30);
+    squirtle wildsqui1 = new squirtle(30);
+    */
+    
+    pikachu wildpika1 = new pikachu(30);
+    pidgey wildpidg1 = new pidgey(30);
+    furret wildfurr1 = new furret(30);
+    rattata wildrat1 = new rattata(30);
+    
+    ArrayList<pokemon> wildpoke = new ArrayList<pokemon>();
+
+    public void makeWildPoke(){
+	/*
+	wildpoke.add(wildbulb1);
+	wildpoke.add(wildchar1);
+	wildpoke.add(wildsqui1);
+	*/
+	wildpoke.add(wildpika1);
+	wildpoke.add(wildpidg1);
+	wildpoke.add(wildrat1);
+	wildpoke.add(wildfurr1);
+				
+    }
+
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -156,15 +230,26 @@ public class guimon extends JFrame implements ActionListener{
 	} else if (mapnum == 3){
 	    currentMap = g.showMap(g.lab);
 	    defaultMap = g.lab;
+	} else if (mapnum == 4){
+	    currentMap = g.showMap(g.thi);
+	    defaultMap = g.thi;
+	} else if (mapnum == 5){
+	    currentMap = g.showMap(g.fou);
+	    defaultMap = g.fou;
 	}
     }
-
+    
     public guimon(){
+	// party[pokenum] = bulb1;
+	makeWildPoke();
 	getCurrentMap();
 	g.makehome();
 	g.makefirst();
 	g.makesec();
 	g.makelab();
+	g.makethi();
+	g.makefou();
+
 
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = getContentPane();
@@ -173,8 +258,30 @@ public class guimon extends JFrame implements ActionListener{
 	text.setRows(getyBound());
 	text.setBorder(BorderFactory.createLineBorder(Color.red,2));
 	text.setEditable(false);
+	myHP.setEditable(false);
+	enemyHP.setEditable(false);
 	Font font = new Font("Monospaced", Font.PLAIN, 20);
 	text.setFont(font);
+	
+	pane.add(titleblock);
+	pane.add(myHP);
+	myHP.setRows(1);
+	myHP.setColumns(3);
+	enemyHP.setRows(1);
+	enemyHP.setColumns(3);
+	pane.add(yourPokePic);
+	pane.add(versus);
+	versus.setIcon(vs);
+	versus.setVisible(false);
+	pane.add(enemyPokePic);
+	pane.add(enemyHP);
+	titleblock.setIcon(titleicon);
+	yourPokePic.setVisible(false);
+	enemyPokePic.setVisible(false);
+	titleblock.setVisible(true);
+	myHP.setVisible(false);
+	enemyHP.setVisible(false);
+
 	pane.add(text);
 	text.addKeyListener(new Key());
 	dialogue.setRows(10);
@@ -184,10 +291,10 @@ public class guimon extends JFrame implements ActionListener{
 	getCurrentMap();
 	swagger = currentMap;
 	text.setText(swagger);
-
 	ability1.setVisible(false);
 	ability2.setVisible(false);
 	ability3.setVisible(false);
+
 	
 	// "CONTINUE CONVERSATION" BUTTON
 	goTalk = new JButton("OK");
@@ -197,6 +304,10 @@ public class guimon extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 		    if (!(talkedToOak1)){
 			talkedToOak1 = true;
+		    }
+		    if (dead){
+			heal();
+			teleportPC();
 		    }
 		    if ((!(sawCharm)) &&
 			((mapnum == 3) &&
@@ -234,7 +345,7 @@ public class guimon extends JFrame implements ActionListener{
 			if ((input != null) && !input.isEmpty()){
 			    newName = input.toUpperCase();
 			    canMove = true;
-			} else if (input.isEmpty()) {
+			} else if (input.isEmpty() || input == null) {
 			    newName = "ASH";
 			    canMove = true;
 			}
@@ -247,7 +358,7 @@ public class guimon extends JFrame implements ActionListener{
 			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
 			    rivalName = input.toUpperCase();
 			    canMove = true;
-			} else if (input.isEmpty()/* && whichInput == 1*/) {
+			} else if (input.isEmpty() || (input == null)/* && whichInput == 1*/) {
 			    rivalName = "GARY";
 			    canMove = true;
 			}
@@ -256,20 +367,85 @@ public class guimon extends JFrame implements ActionListener{
 		    }
 		    
 		    if (input3){
+			String[] options = new String[] {"BULBASAUR", "CHARMANDER", "SQUIRTLE"};
+			    int response = JOptionPane.showOptionDialog(null, "Pick a pokemon!", "Choose!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+	
+			    if (response == 0){
+				party[0] = bulb1;
+			    } else if (response == 1){
+				party[0] = char1;
+			    } else if (response == 2){
+				party[0] = squi1;
+			    }
+			    input3 = false;
+			    talkedToOak2 = true;
+			    send.setVisible(false);
+			    dialogue.append("Great decision! "+newline);
+			    dialogue.append("You picked "+party[catchnum].getSpecies()+"!"+newline + endline+newline);
+			    goTalk.setVisible(true);
+			    door1 = true;
+			    catchnum = catchnum + 1;
+			/*
 			String input = JOptionPane.showInputDialog(guimon.this, "Please type in the name of the pokemon you want to select.");
-			if ((input != null) && !input.isEmpty()/* && whichInput == 1*/){
-			    party[catchnum] = input.toUpperCase();
-			    catchnum = catchnum + 1;
-			} else if (input.isEmpty() || input.toUpperCase() != "BULBASAUR" || input.toUpperCase() != "CHARMANDER" || input.toUpperCase() != "SQUIRTLE" /* && whichInput == 1*/) {
+			dialogue.append(input+newline);
+			if (((input != null) && (!input.isEmpty())) || input.toUpperCase() == "BULBASAUR" || input.toUpperCase() == "CHARMANDER" || input.toUpperCase() == "SQUIRTLE") {
+			    whichPoke = input.toUpperCase();
+			} else if (input.isEmpty()) {
+			    whichPoke = "BULBASAUR";
+			}*/
+
+			
+			/*
+			  if (whichPoke == "BULBASAUR"){
 			    party[catchnum] = bulb1;
-			    catchnum = catchnum + 1;
+			} else if (whichPoke == "SQUIRTLE"){
+			    party[catchnum] = squi1;
+			} else if (whichPoke == "CHARMANDER"){
+			    party[catchnum] = char1;
+			} else {
+			    party[catchnum] = bulb1;
 			}
-			input3 = false;
-			talkedToOak2 = true;
-			send.setVisible(false);
-			dialogue.append("You chose "+starter+"! Great decision."+newline+endline);
-			goTalk.setVisible(true);
-			door1 = true;
+			*/
+			// dialogue.append(party[pokenum].getSpecies());
+		    }
+		    // FOR BATTLING
+
+		    if (encounter && ashturn){
+			if (party[pokenum].getSpecies() == "bulbasaur"){
+			    String[] options = new String[] {"TACKLE", "VINE WHIP", "LEAF STORM"};
+			    int response = JOptionPane.showOptionDialog(null, "Choose an attack!", "BATTLE!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+			    if (response == 0){
+				move1 = true;
+			    } else if (response == 1){
+				move2 = true;
+			    } else if (response == 2){
+				move3 = true;
+			    }
+			}
+			if (party[pokenum].getSpecies() == "charmander"){
+			    String[] options = new String[] {"CUT", "EMBER", "FLAMETHROWER"};
+			    int response = JOptionPane.showOptionDialog(null, "Choose an attack!", "BATTLE!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+			    if (response == 0){
+				move1 = true;
+			    } else if (response == 1){
+				move2 = true;
+			    } else if (response == 2){
+				move3 = true;
+			    }
+			}
+			if (party[pokenum].getSpecies() == "squirtle"){
+			    String[] options = new String[] {"SCRATCH", "WATER SPOUT", "WATER GUN"};
+			    int response = JOptionPane.showOptionDialog(null, "Choose an attack!", "BATTLE!", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+			    if (response == 0){
+				move1 = true;
+			    } else if (response == 1){
+				move2 = true;
+			    } else if (response == 2){
+				move3 = true;
+			    }
+			}
+			
+			yourTurn();
 		    }
 		}
 	    });
@@ -277,8 +453,26 @@ public class guimon extends JFrame implements ActionListener{
 	pane.add(goTalk);
     }
 	    
-	    	
+    public void checkDead(){
+	int check = 0;
+	for (int i = 0;i<catchnum;i++){
+	    if (party[i].getHealth() <= 0){
+		check = check + 1;
+	    }
+	}
+	if (check == (catchnum - 1)){
+	    dead = true;
+	}
+    }
  
+
+    public void heal(){
+	for (int i = 0;i<catchnum;i++){
+	    party[i].setHealth(100);
+	}
+	dead = false;
+    }
+
     public void actionPerformed(ActionEvent e) {}
 	
 
@@ -286,16 +480,85 @@ public class guimon extends JFrame implements ActionListener{
 		
 	public void direction(int x, int y){
 	    getBoundaries();
+	    int wildchance = randomNumber.nextInt(20);
 	    	    
 	    // REGULAR MOVEMENT
 	    if ((xcor - x > 0) && (xcor - x < xbound - 1) &&
 		(ycor - y > 0) && (ycor - y < ybound - 1) && 
 		((defaultMap[ycor-y][xcor-x] == allowedBlock) || 
-		 (defaultMap[ycor-y][xcor-x] == door))) {
+		 (defaultMap[ycor-y][xcor-x] == door) ||
+		 (defaultMap[ycor-y][xcor-x] == grass))) {
 		defaultMap[ycor][xcor] = oldtile;
 		xcor = xcor - x;
 		ycor = ycor - y;
 		oldtile = defaultMap[ycor][xcor];
+
+		// WILD GRASS 
+		if ((mapnum == 4)){
+		    if (defaultMap[ycor][xcor] == '!'){
+			dialogue.append("The grass brushes against you as you walk."+ newline + endline + newline);
+			if (wildchance < 5){
+			    yourPokePic.setVisible(true);
+			    enemyPokePic.setVisible(true);
+			    send.setVisible(true);
+			    versus.setVisible(true);
+			    text.setVisible(false);
+			    encounter = true;
+			    canMove = false;
+			    send.setText("CHOOSE AN ATTACK!");
+			    // CurrentPoke();
+			    // getCurrentEnemy();
+			    // getMoveNames(party[pokenum]);
+			    // getMoveNames();
+			    currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
+			    
+			    System.out.println(party[pokenum].getSpecies()); // THIS IS THE PROBLEM
+			    
+			    System.out.println(currentEnemy.getSpecies());
+			    
+			    dialogue.append("Your "+party[pokenum].getSpecies()+" encounters a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline+endline+newline+endline+newline);
+
+
+			    myHP.setVisible(true);
+			    enemyHP.setVisible(true);
+			    myHP.setText(""+party[pokenum].getHealth());
+			    enemyHP.setText(""+currentEnemy.getHealth());
+
+			    if (party[pokenum].getSpecies() == "bulbasaur"){
+				yourPokePic.setIcon(bulbBack);
+			    } else if (party[pokenum].getSpecies() == "charmander"){
+				yourPokePic.setIcon(charBack);
+			    } else if (party[pokenum].getSpecies() == "squirtle"){
+				yourPokePic.setIcon(squiBack);
+			    } else if (party[pokenum].getSpecies() == "pikachu"){
+				yourPokePic.setIcon(pikaBack);
+			    }
+			    if (currentEnemy.getSpecies() == "bulbasaur"){
+				enemyPokePic.setIcon(bulbFront);
+			    } else if (currentEnemy.getSpecies() == "charmander"){
+				enemyPokePic.setIcon(charFront);
+			    } else if (currentEnemy.getSpecies() == "squirtle"){
+				enemyPokePic.setIcon(squiFront);
+			    } else if (currentEnemy.getSpecies() == "pikachu"){
+				enemyPokePic.setIcon(pikaFront);
+			    }
+			}
+		    } else {
+			    yourPokePic.setVisible(false);
+			    enemyPokePic.setVisible(false);
+
+			    myHP.setVisible(false);
+			    enemyHP.setVisible(false);
+			    
+			    send.setVisible(false);
+			    encounter = false;
+			    for (int i=0;i<4;i++){
+				wildpoke.get(i).setHealth(100);
+			    }
+		    }
+		}
+	    
+		    
 
 		// DIALOGUE TRIGGERS
 		if ((mapnum == 0) && 
@@ -376,6 +639,15 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append("SQUIRTLE - THE WATER-TYPE POKEMON"+newline);
 		    dialogue.append(endline+newline);	
 		}
+		
+		if ((mapnum == 4) && 
+		    (((ycor == 7) && 
+		      ((xcor == 5) || (xcor == 7))) || 
+		     ((ycor == 8) && (xcor == 6)))){
+		    canMove = false;
+		    goTalk.setVisible(true);
+		    infoTalk(0);
+		}
 
 
 		// DOOR FUNCTIONS
@@ -418,7 +690,7 @@ public class guimon extends JFrame implements ActionListener{
       
 		    if (mapnum == 2){
 			if ((ycor == 11) && (xcor == 19)) {
-			    mapnum = 1;
+		 	    mapnum = 1;
 			    getCurrentMap();
 			    swagger = currentMap;
 			    text.setText(swagger);
@@ -437,10 +709,23 @@ public class guimon extends JFrame implements ActionListener{
 			    allowedBlock = ' ';
 			    oldtile = ' ';
 			}
+			if ((ycor == 1) && (xcor == 13) && door1 ){
+			    mapnum = 4;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 10;
+			    xcor = 12;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+			if ((ycor == 1) && (xcor == 13) && !door1 ){
+			    dialogue.append("This way is blocked by a large pokemon."+newline+endline+newline);
+			}
 		    }
 		    
 		    if (mapnum == 3){
-			if ((ycor == 9) & (xcor == 9)) {
+			if ((ycor == 9) && (xcor == 9)) {
 			    mapnum = 2;
 			    getCurrentMap();
 			    swagger = currentMap;
@@ -451,18 +736,54 @@ public class guimon extends JFrame implements ActionListener{
 			    oldtile = ' ';
 			}
 		    }
+		    
+		    if (mapnum == 4){
+			if ((ycor == 11) && (xcor == 12)){
+			    mapnum = 2;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 2;
+			    xcor = 13;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+			if ((ycor == 5) && (xcor == 23)){
+			    mapnum = 5;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 10;
+			    xcor = 2;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+		    }
+		    if (mapnum == 5){
+			if ((ycor == 10) && (xcor == 1)){
+			    mapnum = 4;
+			    getCurrentMap();
+			    swagger = currentMap;
+			    text.setText(swagger);
+			    ycor = 5;
+			    xcor = 22;
+			    allowedBlock = ' ';
+			    oldtile = ' ';
+			}
+		    }
+		    
 		}
 		
 		defaultMap[ycor][xcor] = '@';
 		getCurrentMap();
 		swagger = currentMap;
 		text.setText(swagger);
-	    }
 	    
+	    }
 	}
     
-    // STORYLINE + DIALOGUE FUNCTIONS
-
+	// STORYLINE + DIALOGUE FUNCTIONS
+    
 	public void nameSelect() {
 	    
 	    String g1 = " Welcome to the world of Pokemon!";
@@ -513,9 +834,32 @@ public class guimon extends JFrame implements ActionListener{
 	    
 	}
 
+	public void infoTalk(int i){
+	    if (i == 0){
+		dialogue.append("I've restored all of your Pokemon to full HP."+newline);
+		dialogue.append("Be wary of the tall grass, marked by (!)." + newline);
+		dialogue.append("It's said to be inhabited by wild Pokemon."+newline);
+		dialogue.append(endline+newline);
+		heal();
+	    }
 
+	    if (i == 1){
+		
+	    }
+	    if (i == 2){
+
+	    }
+	    if (i == 3){
+
+	    }
+	    if (i == 4){
+
+	    }
+
+
+	}
 	
-  
+	
 	    
     
 
@@ -546,89 +890,241 @@ public class guimon extends JFrame implements ActionListener{
     // Remember to implement species and make party a pokemon[] array.
     
     
-    public void getCurrentPoke(){
-	currentPoke = party[pokenum];
-    }
-
-    public void getCurrentEnemy(){
-	currentEnemy = wildpoke[randomNumber.nextInt(wildpoke.size())];
-    }
-   
-    public void yourTurn(){ // edit the "enemy" and boolean things
-	if (encounter) {
-	    if (currentPoke.getHealth() <= 0){
-		encounter = false;
-	    } else if (currentPoke.species == "BULBASAUR"){
-		if (move1){
-		    currentPoke.cut(enemy);
-<<<<<<< HEAD
-		    dialogue.append("BULBASAUR used CUT on " + enemy.species + newline);
-		} else if (move2){
-		    currentPoke.vinewhip(enemy);
-		    dialogue.append("BULBASAUR used VINE WHIP on " + enemy.species + newline);
-		} else if (move3){
-		    currentPoke.leafstorm(enemy);
-		    dialogue.append("BULBASAUR used LEAF STORM on " + enemy.species + newline);
-		}
-	    } else if (currentPoke.species == "CHARMANDER"){
-		if (move1){
-		    currentPoke.scratch(enemy);
-		    dialogue.append("CHARMANDER used SCRATCH on " + enemy.species + newline); 
-		} else if (move2){
-		    currentPoke.megakick(enemy);
-		    dialogue.append("CHARMANDER used MEGAKICK on " + enemy.species + newline);
-		} else if (move3){
-		    currentPoke.focuspunch(enemy);
-		    dialogue.append("CHARMANDER used FOCUS PUNCH on " + enemy.species + newline);
-=======
-		    dialogue.append("BULBASAUR used CUT");
-		} else if (move2){
-		    currentPoke.vinewhip(enemy);
-		} else if (move3){
-		    currentPoke.vinewhip(enemy);
-		}
-	    } else if (currentPoke.species == "CHARMANDER"){
-		if (move1){
-		    currentPoke.cut(enemy);
-		} else if (move2){
-		    currentPoke.megakick(enemy);
-		} else if (move3){
-		    currentPoke.focuspunch(enemy);
->>>>>>> 5fca2a913d1114d92e3ba7f9a15efbf787127b3a
-		}
-	    } else if (currentPoke.species == "PIKACHU"){
-		if (move1){
-		    currentPoke.headbutt(enemy);
-		} else if (move2){
-		    currentPoke.voltswitch(enemy);
-		} else if (move3){
-		    currentPoke.thunder(enemy);
-		}
-	    } else if (currentPoke.species == "SQUIRTLE"){
-		if (move1){
-		    currentPoke.watergun(enemy);
-		} else if (move2){
-		    currentPoke.surf(enemy);
-		} else if (move3){
-		    currentPoke.waterspout(enemy);
-		}
-	    }
-	}
-    }
-
-    /*
-    public void enemyTurn(){
-	if (encounter) {
-	    if
-	    
+    /* public void getCurrentPoke(){
+	party[pokenum] = party[pokenum];
     }
     */
+
+    public void getCurrentEnemy(){
+	currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
+    }
+
+    public void healWild(){
+	for (int i = 0;i<wildpoke.size();i++){
+	    wildpoke.get(i).setHealth(100);
+	}
+    }
+   
+   
+    public void teleportPC(){
+	mapnum = 5;
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
+	ycor = 6;
+	xcor = 13;
+	allowedBlock = ' ';
+	oldtile = ' ';
+	
+	defaultMap[ycor][xcor] = '@';
+	getCurrentMap();
+	swagger = currentMap;
+	text.setText(swagger);
+    }
+
+
+    
+    public void yourTurn(){ // edit the "enemy" and boolean things
+	if (encounter) {
+	    text.setVisible(false);
+	    if (party[pokenum].getHealth() <= 0){
+		encounter = false;
+		text.setVisible(true);
+		send.setVisible(false);
+		ashturn = true;
+
+		goTalk.setVisible(true);
+		myHP.setVisible(false);
+		enemyHP.setVisible(false);
+		versus.setVisible(false);
+		yourPokePic.setVisible(false);
+		enemyPokePic.setVisible(false);
+		checkDead();
+		if (dead){
+		    dialogue.append("You have run out of usable pokemon!"+newline);
+		    dialogue.append("You will be sent to the nearest Pokemon Center."+newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (party[pokenum].getSpecies() == "bulbasaur"){
+		if (move1){
+		    party[pokenum].attack2(currentEnemy);
+		    dialogue.append("Your BULBASAUR used TACKLE on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move2){
+		    party[pokenum].attack2(currentEnemy);
+		    dialogue.append("Your BULBASAUR used VINE WHIP on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move3){
+		    party[pokenum].attack3(currentEnemy);
+		    dialogue.append("Your BULBASAUR used LEAF STORM on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (party[pokenum].getSpecies() == "charmander"){
+		if (move1){
+		    party[pokenum].attack1(currentEnemy);
+		    dialogue.append("Your CHARMANDER used CUT on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline); 
+		    dialogue.append(endline+newline);
+		} else if (move2){
+		    party[pokenum].attack2(currentEnemy);
+		    dialogue.append("Your CHARMANDER used EMBER on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move3){
+		    party[pokenum].attack3(currentEnemy);
+		    dialogue.append("Your CHARMANDER used FLAMETHROWER on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (party[pokenum].getSpecies() == "pikachu"){
+		if (move1){
+		    party[pokenum].attack1(currentEnemy);
+		    dialogue.append("Your PIKACHU used HEADBUTT on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move2){
+		    party[pokenum].attack2(currentEnemy);
+		    dialogue.append("Your PIKACHU used SPARK on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move3){
+		    party[pokenum].attack3(currentEnemy);
+		    dialogue.append("Your PIKACHU used THUNDER on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (party[pokenum].getSpecies() == "squirtle"){
+		if (move1){
+		    party[pokenum].attack1(currentEnemy);
+		    dialogue.append("Your SQUIRTLE used SCRATCH on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move2){
+		    party[pokenum].attack2(currentEnemy);
+		    dialogue.append("Your SQUIRTLE used WATERSPOUT on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (move3){
+		    party[pokenum].attack3(currentEnemy);
+		    dialogue.append("Your SQUIRTLE used WATERGUN on the enemy " + currentEnemy.getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    }
+	    
+	    move1 = false;
+	    move2 = false;
+	    move3 = false;
+	    enemyTurn();	  
+	}
+	
+	myHP.setText(""+party[pokenum].getHealth());
+	enemyHP.setText(""+currentEnemy.getHealth());
+    }
+ 
+    public void enemyTurn(){
+	int rand = randomNumber.nextInt(3);
+	if (encounter) {
+	    text.setVisible(false);
+	    if (currentEnemy.getHealth() <= 0){
+		encounter = false;
+		text.setVisible(true);	
+		send.setVisible(false); 
+		ashturn = true;
+		goTalk.setVisible(true);
+		myHP.setVisible(false);
+		enemyHP.setVisible(false);
+		versus.setVisible(false);
+		yourPokePic.setVisible(false);
+		enemyPokePic.setVisible(false);
+		
+		healWild();
+		checkDead();
+		if (!dead){
+		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!"+newline);
+		    dialogue.append(endline+newline);
+		}
+		if (dead){
+		    dialogue.append("You have run out of usable pokemon!"+newline);
+		    dialogue.append("You will be sent to the nearest Pokemon Center."+newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "bulbasaur"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy BULBASAUR used TACKLE on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy BULBASAUR used VINE WHIP on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy BULBASAUR used LEAF STORM on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "charmander"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy CHARMANDER used CUT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline); 
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy CHARMANDER used EMBER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy CHARMANDER used FLAMETHROWER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "pikachu"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy PIKACHU used HEADBUTT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy PIKACHU used SPARK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy PIKACHU used THUNDER on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "squirtle"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy SQUIRTLE used SCRATCH on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy SQUIRTLE used WATERSPOUT on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy SQUIRTLE used WATERGUN on"+newline+" your " + party[pokenum].getSpecies().toUpperCase() + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "pidgey"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used PECK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used WING ATTACK on"+newline+" your " + party[pokenum].getSpecies().toUpperCase()  + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Enemy PIDGEY used SCRATCH on"+newline+" your " + party[pokenum].getSpecies().toUpperCase() + newline);
+		    dialogue.append(endline+newline);
+		}
+	    }
+	    
+	    ashturn = true;
+	}
+	
+	myHP.setText(""+party[pokenum].getHealth());
+	enemyHP.setText(""+currentEnemy.getHealth());
+    }
+    
 
     // DRIVER
     public static void main(String[] args){
 	guimon f = new guimon();
-	f.setTitle("JAVA-MON");
-	f.setSize(400,600);
+	f.setTitle("JAVAMON - A POKEMON CLONE");
+	f.setSize(400,720);
 	f.setVisible(true);
 	f.text.setRows(f.getyBound());
 	f.text.setColumns(f.getxBound());

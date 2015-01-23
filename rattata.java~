@@ -1,21 +1,21 @@
 import java.util.Random;
-public class pidgey extends pokemon {
+public class rattata extends pokemon {
     random randomNumber = new Random();
-    String species = "PIDGEY";
+    String species = "RATTATA";
 
-    public pidgey(int n){
+    public rattata(int n){
 	setStrength(n);
 	setHealth(100);
 	setSpeed(40);
-	setSpecies("pidgey");
+	setSpecies("rattata");
 	setType("normal");
     }
 
-    public pidgey(){
+    public rattata(){
 	setStrength(50);
 	setHealth(100);
 	setSpeed(40);
-	setSpecies("pidgey");
+	setSpecies("rattata");
 	setType("normal");
     }
 }
