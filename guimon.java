@@ -32,6 +32,8 @@ public class guimon extends JFrame implements ActionListener{
     // BOOLEANS
     boolean canMove = true;
     boolean caught = false;
+    boolean leaderFight = false;
+    boolean beatLeader = false;
     // GUI SETUP
     JOptionPane textField = new JOptionPane();
     Container pane;
@@ -76,6 +78,9 @@ public class guimon extends JFrame implements ActionListener{
     ImageIcon furrFront = new ImageIcon("furretfront.png");
     ImageIcon furrBack = new ImageIcon("furretback.png");
 
+    ImageIcon geoFront = new ImageIcon("geodudefront.png");
+    ImageIcon geoBack = new ImageIcon("geodudeback.png");
+    
     ImageIcon vs = new ImageIcon("VS.png");
 
     // MAP SETUP
@@ -257,6 +262,8 @@ public class guimon extends JFrame implements ActionListener{
     
     ArrayList<pokemon> wildpoke = new ArrayList<pokemon>();
 
+    geodude leader = new geodude(42);
+    
     public void makeWildPoke(){
 	/*
 	wildpoke.add(wildbulb1);
@@ -416,7 +423,39 @@ public class guimon extends JFrame implements ActionListener{
 			  (xcor == 3)))){
 			sawSquirt = true;
 		    }
+		    if (leaderFight){
+			
+			yourPokePic.setVisible(true);
+			enemyPokePic.setVisible(true);
+			send.setVisible(true);
+			versus.setVisible(true);
+			text.setVisible(false);
+			if (party[pokenum].getSpecies() == "bulbasaur"){
+			    yourPokePic.setIcon(bulbBack);
+			} else if (party[pokenum].getSpecies() == "charmander"){
+			    yourPokePic.setIcon(charBack);
+			} else if (party[pokenum].getSpecies() == "squirtle"){
+			    yourPokePic.setIcon(squiBack);
+			} else if (party[pokenum].getSpecies() == "pikachu"){
+			    yourPokePic.setIcon(pikaBack);
+			} else if (party[pokenum].getSpecies() == "pidgey"){
+			    yourPokePic.setIcon(pidgBack);
+			} else if (party[pokenum].getSpecies() == "furret"){
+			    yourPokePic.setIcon(furrBack);
+			} else if (party[pokenum].getSpecies() == "rattata"){
+			    yourPokePic.setIcon(rattBack);
+			}
+			enemyPokePic.setIcon(geoFront);
 
+
+			myHP.setVisible(true);
+			enemyHP.setVisible(true);
+			myHP.setText(""+party[pokenum].getHealth());
+			enemyHP.setText(""+currentEnemy.getHealth());
+	
+		    }
+
+		    
 		    goTalk.setVisible(false);
 		    canMove = true;
 		}
@@ -642,7 +681,19 @@ public class guimon extends JFrame implements ActionListener{
 		xcor = xcor - x;
 		ycor = ycor - y;
 		oldtile = defaultMap[ycor][xcor];
+		
+		//
+		if ((mapnum == 6)){
+		    if ((ycor == 4) && (xcor == 9)){
+			dialogue.append("Welcome to the Pokemon Center!"+newline);
+			dialogue.append("Your Pokemon will be restored to full HP."+newline);
+			dialogue.append(endline+newline);
+			heal();
+			goTalk.setVisible(true);
+		    }
+		}
 
+		
 		// WILD GRASS 
 		if ((mapnum == 4)){
 		    if (defaultMap[ycor][xcor] == '!'){
@@ -662,9 +713,9 @@ public class guimon extends JFrame implements ActionListener{
 			    // getMoveNames();
 			    currentEnemy = wildpoke.get(randomNumber.nextInt(wildpoke.size()));
 			    
-			    System.out.println(party[pokenum].getSpecies()); // THIS IS THE PROBLEM
+			    // System.out.println(party[pokenum].getSpecies()); // THIS IS THE PROBLEM
 			    
-			    System.out.println(currentEnemy.getSpecies());
+			    // System.out.println(currentEnemy.getSpecies());
 			    
 			    dialogue.append("Your "+party[pokenum].getSpecies()+" encounters a wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline+endline+newline+endline+newline);
 
@@ -723,6 +774,13 @@ public class guimon extends JFrame implements ActionListener{
 		    
 
 		// DIALOGUE TRIGGERS
+
+		if((mapnum == 7) &&
+		   (ycor == 2) &&
+		   (xcor == 9) &&
+		   !beatLeader){
+		    talkToBrock();
+		}
 		if ((mapnum == 0) && 
 		    (ycor == 1) && 
 		    (xcor == 16) && 
@@ -944,7 +1002,7 @@ public class guimon extends JFrame implements ActionListener{
 			    allowedBlock = ' ';
 			    oldtile = ' ';
 			}
-			if ((ycor == 8) && (xcor == 23)){
+			if ((ycor == 7) && (xcor == 23)){
 			    mapnum = 7;
 			    getCurrentMap();
 			    swagger = currentMap;
@@ -1018,6 +1076,22 @@ public class guimon extends JFrame implements ActionListener{
 	    dialogue.append(g3+newline);
 	    dialogue.append(g4+newline);
 	    dialogue.append(endline+newline);	    
+	    
+	}
+
+	public void talkToBrock(){
+	    dialogue.append("I'm Brock! This is my ROCK-type gym."+newline);
+	    dialogue.append("I challenge you to a battle!"+newline+endline+newline);
+	    
+	    currentEnemy = leader;
+	    
+	   
+	    encounter = true;
+	    canMove = false;
+	    send.setText("CHOOSE AN ATTACK!");
+	    goTalk.setVisible(true);
+	    leaderFight = true;
+
 	    
 	}
 	
@@ -1161,6 +1235,8 @@ public class guimon extends JFrame implements ActionListener{
 		    dialogue.append("You have run out of usable pokemon!"+newline);
 		    dialogue.append("You will be sent to the nearest Pokemon Center."+newline);
 		    dialogue.append(endline+newline);
+		    leaderFight = false;
+		    leader.setHealth(100);
 		}
 	    } else if (party[pokenum].getSpecies() == "bulbasaur"){
 		if (move1){
@@ -1293,12 +1369,19 @@ public class guimon extends JFrame implements ActionListener{
 		versus.setVisible(false);
 		yourPokePic.setVisible(false);
 		enemyPokePic.setVisible(false);
+		leaderFight = false;
 		if (caught){
 		    dialogue.append("You have caught the wild "+currentEnemy.getSpecies()+"!"+newline+endline+newline);
 		}
 		healWild();
 		checkDead();
-		if (!dead){
+		if (!dead && currentEnemy.getSpecies() == "geodude"){
+		    dialogue.append("You defeated BROCK!"+newline+endline+newline);
+		    beatLeader = true;
+		    dialogue.append("Here is the ROCK badge. Congratulations!"+newline);
+		    dialogue.append("The exit roads are blocked, "+newline+"but go battle wild Pokemon!");
+		    dialogue.append(endline+newline);
+		} else if (!dead){
 		    dialogue.append("You have defeated the enemy "+currentEnemy.getSpecies()+"!"+newline);
 		    dialogue.append(endline+newline);
 		    // party[pokenum].setStrength(party[pokenum].getStrength() + exp);
@@ -1403,6 +1486,20 @@ public class guimon extends JFrame implements ActionListener{
 		} else if (rand == 2){
 		    currentEnemy.attack3(party[pokenum]);
 		    dialogue.append("Enemy RATTATA used SCRATCH!" + newline);
+		    dialogue.append(endline+newline);
+		}
+	    } else if (currentEnemy.getSpecies() == "geodude"){
+		if (rand == 0){
+		    currentEnemy.attack1(party[pokenum]);
+		    dialogue.append("Brock's GEODUDE used ROCK THROW!" + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 1){
+		    currentEnemy.attack2(party[pokenum]);
+		    dialogue.append("Brock's GEODUDE used TREMOR!" + newline);
+		    dialogue.append(endline+newline);
+		} else if (rand == 2){
+		    currentEnemy.attack3(party[pokenum]);
+		    dialogue.append("Brock's GEODUDE used MAGNITUDE!" + newline);
 		    dialogue.append(endline+newline);
 		}
 	    }
