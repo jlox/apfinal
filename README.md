@@ -6,7 +6,9 @@ apfinal
  _____________________________________________
 
  At first, Jeanne and I decided to create an ASCII-based pokemon
- clone within the terminal, but later decided to
+ clone within the terminal, but later decided to use gui.
+
+COMPILE AND RUN guimon.java !
 
 
   ___________________________________________
